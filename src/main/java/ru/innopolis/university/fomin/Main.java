@@ -50,7 +50,7 @@ public class Main {
 
         // Выбор случайного имени
         Random random = new Random();
-        Map.Entry<String, Sex> entry = getNameByIndex(names, random.nextInt(names.size()) );
+        Map.Entry<String, Sex> entry = getEntryByIndex(names, random.nextInt(names.size()) );
 
         // Случайные возраст
         int age = getRandomValue(18, 45);
@@ -59,7 +59,7 @@ public class Main {
         return new Person(entry.getKey(), age, entry.getValue());
     }
 
-    private static Map.Entry<String, Sex> getNameByIndex(Map<String, Sex> names, int index) {
+    private static Map.Entry<String, Sex> getEntryByIndex(Map<String, Sex> names, int index) {
         int i = 0;
         for (Map.Entry<String, Sex> entry : names.entrySet()) {
             if (i == index) {
