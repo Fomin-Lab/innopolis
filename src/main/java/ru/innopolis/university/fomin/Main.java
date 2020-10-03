@@ -6,14 +6,20 @@ import ru.innopolis.university.fomin.algorithms.FastSort;
 
 import java.util.*;
 
+import static ru.innopolis.university.fomin.Sex.WOMAN;
+import static ru.innopolis.university.fomin.Sex.MAN;
+
 public class Main {
 
     public static void main(String[] args) {
         List<Person> persons1 = createPersons();
-        List<Person> persons2 = createPersons();
+        List<Person> persons2 = new ArrayList<>(persons1);
 
         AlgorithmSort<Person> bubbleSort = new BubbleSort<>();
         bubbleSort.sort(persons1);
+
+        printList(persons1);
+        printList(persons2);
 
         AlgorithmSort<Person> fastSort = new FastSort<>();
         fastSort.sort(persons2);
@@ -26,15 +32,53 @@ public class Main {
 
     private static List<Person> createPersons() {
         List<Person> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            list.add(new Person("Andrey", 12, new Sex(Sex.MAN)));
-            list.add(new Person("Vasya", 34, new Sex(Sex.MAN)));
-            list.add(new Person("Nastya", 27, new Sex(Sex.WOMAN)));
-            list.add(new Person("Sveta", 35, new Sex(Sex.WOMAN)));
-            list.add(new Person("Tatyana", 32, new Sex(Sex.WOMAN)));
-            list.add(new Person("Maxim", 25, new Sex(Sex.MAN)));
+        for (int i = 0; i < 10; i++) {
+            list.add(makeRandomPerson());
         }
         return list;
+    }
+
+    private static Person makeRandomPerson() {
+        // Таблица различных имен
+        Map<String, Sex> names = new HashMap<String, Sex>() {{
+           put("Андрей", new Sex(MAN));
+           put("Денис", new Sex(MAN));
+           put("Анна", new Sex(WOMAN));
+           put("Анастасия", new Sex(WOMAN));
+           put("Татьяна", new Sex(WOMAN));
+           put("Екатерина", new Sex(WOMAN));
+           put("Василий", new Sex(MAN));
+           put("Светалана", new Sex(WOMAN));
+        }};
+
+        // Выбор случайного имени
+        Random random = new Random();
+        Map.Entry<String, Sex> entry = getNameByIndex(names, random.nextInt(names.size()) );
+
+        // Случайные возраст
+        int age = getRandomValue(18, 45);
+
+        assert entry != null;
+        return new Person(entry.getKey(), age, entry.getValue());
+    }
+
+    private static Map.Entry<String, Sex> getNameByIndex(Map<String, Sex> names, int index) {
+        int i = 0;
+        for (Map.Entry<String, Sex> entry : names.entrySet()) {
+            if (i == index) {
+                return entry;
+            }
+            i++;
+        }
+        return null;
+    };
+
+    private static int getRandomValue(int min, int max) {
+        int diff = max - min;
+        Random random = new Random();
+        int i = random.nextInt(diff + 1);
+        i += min;
+        return i;
     }
 
     protected static void printList(List<Person> persons) {
