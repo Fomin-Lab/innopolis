@@ -18,9 +18,6 @@ public class Main {
         AlgorithmSort<Person> bubbleSort = new BubbleSort<>();
         bubbleSort.sort(persons1);
 
-        printList(persons1);
-        printList(persons2);
-
         AlgorithmSort<Person> fastSort = new FastSort<>();
         fastSort.sort(persons2);
 
@@ -32,7 +29,7 @@ public class Main {
 
     private static List<Person> createPersons() {
         List<Person> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             list.add(makeRandomPerson());
         }
         return list;
