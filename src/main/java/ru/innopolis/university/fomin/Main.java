@@ -8,21 +8,21 @@ public class Main {
         List<Person> persons1 = createPersons();
         List<Person> persons2 = createPersons();
 
-        HumanSort<Person> bubbleHumanSort = new BubbleHumanSort<Person>();
-        bubbleHumanSort.doSort(persons1);
+        AlgorithmSort<Person> bubbleSort = new BubbleSort<Person>();
+        bubbleSort.sort(persons1);
 
-        HumanSort<Person> fastHumanSort = new FastHumanSort<Person>();
-        fastHumanSort.doSort(persons2);
+        AlgorithmSort<Person> fastSort = new FastSort<Person>();
+        fastSort.sort(persons2);
 
         printList(persons1);
 
-        System.out.println("Время выполнения (Пузырьком): " + bubbleHumanSort.getTime() + "ms");
-        System.out.println("Время выполнения (Быстрая сортировка): " + fastHumanSort.getTime() + "ms");
+        System.out.println("Время выполнения (Пузырьком): " + bubbleSort.getTime() + "ms");
+        System.out.println("Время выполнения (Быстрая сортировка): " + fastSort.getTime() + "ms");
     }
 
     private static List<Person> createPersons() {
         List<Person> list = new ArrayList<Person>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 5; i++) {
             list.add(new Person("Andrey", 12, new Sex(Sex.MAN)));
             list.add(new Person("Vasya", 34, new Sex(Sex.MAN)));
             list.add(new Person("Nastya", 27, new Sex(Sex.WOMAN)));

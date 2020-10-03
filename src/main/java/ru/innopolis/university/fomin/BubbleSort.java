@@ -5,16 +5,14 @@ import java.util.List;
 /*
     Реализация сортировки пузырьком
  */
-public class BubbleHumanSort<T extends Human> extends HumanSort<T> {
+public class BubbleSort<T extends Sortable<T>> extends AlgorithmSort<T> {
     @Override
     protected void doSort(List<T> list) {
-        startTimer();
         Object[] result = bubbleSort(list);
         list.clear();
         for (int i = 0; i < result.length; i++) {
             list.add((T) result[i]);
         }
-        endTimer();
     }
 
     /*
@@ -35,5 +33,11 @@ public class BubbleHumanSort<T extends Human> extends HumanSort<T> {
             }
         }
         return array;
+    }
+
+    protected void swap(Object[] array, int ind1, int ind2) {
+        Object tmp = array[ind1];
+        array[ind1] = array[ind2];
+        array[ind2] = tmp;
     }
 }

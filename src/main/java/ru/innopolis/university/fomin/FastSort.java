@@ -6,12 +6,10 @@ import java.util.List;
 /*
     Реализация быстрой сортировки
  */
-public class FastHumanSort<T extends Human> extends HumanSort<T> {
+public class FastSort<T extends Sortable<T>> extends AlgorithmSort<T> {
     @Override
     protected void doSort(List<T> list) {
-        startTimer();
         fastSort(list);
-        endTimer();
     }
 
     /*

@@ -1,6 +1,6 @@
 package ru.innopolis.university.fomin;
 
-public class Person implements Human {
+public class Person implements Sortable<Person> {
     protected String name;
     protected int age;
     protected Sex sex;
@@ -11,7 +11,6 @@ public class Person implements Human {
         this.sex = sex;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -20,7 +19,6 @@ public class Person implements Human {
         this.name = name;
     }
 
-    @Override
     public int getAge() {
         return age;
     }
@@ -29,7 +27,6 @@ public class Person implements Human {
         this.age = age;
     }
 
-    @Override
     public String getSex() {
         return sex.getSex();
     }
@@ -42,8 +39,8 @@ public class Person implements Human {
         TODO: Тут что то не так!
      */
     @Override
-    public int compareTo(Human o) {
-        return this.getSex().compareTo(o.getSex());
+    public int compareTo(Person o) {
+        return this.getName().compareTo(o.getName());
     }
 
     @Override
