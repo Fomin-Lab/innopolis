@@ -1,5 +1,9 @@
 package ru.innopolis.university.fomin;
 
+import ru.innopolis.university.fomin.algorithms.AlgorithmSort;
+import ru.innopolis.university.fomin.algorithms.BubbleSort;
+import ru.innopolis.university.fomin.algorithms.FastSort;
+
 import java.util.*;
 
 public class Main {
@@ -8,10 +12,10 @@ public class Main {
         List<Person> persons1 = createPersons();
         List<Person> persons2 = createPersons();
 
-        AlgorithmSort<Person> bubbleSort = new BubbleSort<Person>();
+        AlgorithmSort<Person> bubbleSort = new BubbleSort<>();
         bubbleSort.sort(persons1);
 
-        AlgorithmSort<Person> fastSort = new FastSort<Person>();
+        AlgorithmSort<Person> fastSort = new FastSort<>();
         fastSort.sort(persons2);
 
         printList(persons1);
@@ -21,7 +25,7 @@ public class Main {
     }
 
     private static List<Person> createPersons() {
-        List<Person> list = new ArrayList<Person>();
+        List<Person> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             list.add(new Person("Andrey", 12, new Sex(Sex.MAN)));
             list.add(new Person("Vasya", 34, new Sex(Sex.MAN)));

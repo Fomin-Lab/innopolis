@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin;
+package ru.innopolis.university.fomin.algorithms;
 
 import java.util.Collections;
 import java.util.List;

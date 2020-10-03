@@ -1,5 +1,7 @@
 package ru.innopolis.university.fomin;
 
+import ru.innopolis.university.fomin.algorithms.Sortable;
+
 public class Person implements Sortable<Person> {
     protected String name;
     protected int age;
