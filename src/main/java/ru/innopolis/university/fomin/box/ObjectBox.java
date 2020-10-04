@@ -3,7 +3,7 @@ package ru.innopolis.university.fomin.box;
 import java.util.*;
 
 public class ObjectBox {
-    private List<Object> objectList;
+    protected List<Object> objectList;
 
     public ObjectBox() {
         this.objectList = new ArrayList<Object>();

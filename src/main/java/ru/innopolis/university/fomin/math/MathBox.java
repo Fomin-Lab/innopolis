@@ -1,34 +1,49 @@
 package ru.innopolis.university.fomin.math;
 
-import java.util.ArrayList;
+import ru.innopolis.university.fomin.box.ObjectBox;
+
 import java.util.Arrays;
-import java.util.List;
 
-public class MathBox {
-    List<Number> numbers;
-
+public class MathBox extends ObjectBox {
     public MathBox(Number[] numbers) {
-        this.numbers = new ArrayList<Number>();
-        this.numbers.addAll(Arrays.asList(numbers));
+        super();
+        this.objectList.addAll(Arrays.asList(numbers));
     }
 
     public int summator() {
         int result = 0;
-        for (Number number : numbers) {
+        for (Object object : objectList) {
+            Number number = (Number) object;
             result = result + number.get();
         }
         return result;
     }
 
     public void splitter(int divider) {
-        for (Number number : numbers) {
+        for (Object object : objectList) {
+            Number number = (Number) object;
             number.divide(divider);
         }
     }
 
     public void remove(Integer value) {
         Number number = new Number(value);
-        int index = numbers.indexOf(number);
-        numbers.remove(index);
+        int index = objectList.indexOf(number);
+        objectList.remove(index);
+    }
+
+    @Override
+    public void addObject(Object object) {
+        super.addObject(object);
+    }
+
+    @Override
+    public void removeObject(Object object) {
+        super.removeObject(object);
+    }
+
+    @Override
+    public void dump() {
+        super.dump();
     }
 }
