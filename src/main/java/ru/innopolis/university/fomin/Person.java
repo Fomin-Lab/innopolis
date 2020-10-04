@@ -37,12 +37,23 @@ public class Person implements Sortable<Person> {
         this.sex = sex;
     }
 
-    /*
-        TODO: Тут что то не так!
-     */
     @Override
     public int compareTo(Person o) {
-        return this.getName().compareTo(o.getName());
+        int compareName = this.getName().compareTo(o.getName());
+        int compareAge = Integer.compare(this.getAge(), o.getAge());
+        int compareSex = this.getSex().compareTo(o.getSex());
+
+        if (compareSex == 0) {
+            if (compareAge == 0) {
+                return compareName;
+            } else {
+                return -1 * compareAge;
+            }
+        } else if (compareSex > 0) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     @Override

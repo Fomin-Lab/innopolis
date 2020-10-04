@@ -38,14 +38,16 @@ public class Main {
     private static Person makeRandomPerson() {
         // Таблица различных имен
         Map<String, Sex> names = new HashMap<String, Sex>() {{
-           put("Андрей", new Sex(MAN));
-           put("Денис", new Sex(MAN));
-           put("Анна", new Sex(WOMAN));
-           put("Анастасия", new Sex(WOMAN));
-           put("Татьяна", new Sex(WOMAN));
-           put("Екатерина", new Sex(WOMAN));
-           put("Василий", new Sex(MAN));
-           put("Светалана", new Sex(WOMAN));
+            put("Андрей", new Sex(MAN));
+            put("Антон", new Sex(MAN));
+            put("Аркадий", new Sex(MAN));
+            put("Денис", new Sex(MAN));
+            put("Анна", new Sex(WOMAN));
+            put("Анастасия", new Sex(WOMAN));
+            put("Татьяна", new Sex(WOMAN));
+            put("Екатерина", new Sex(WOMAN));
+            put("Василий", new Sex(MAN));
+            put("Светалана", new Sex(WOMAN));
         }};
 
         // Выбор случайного имени
