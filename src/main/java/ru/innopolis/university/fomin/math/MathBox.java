@@ -33,7 +33,8 @@ public class MathBox extends ObjectBox {
     }
 
     @Override
-    public void addObject(Object object) {
+    public void addObject(Object object) throws IncompatibleTypesException {
+        if (!(object instanceof Number)) throw new IncompatibleTypesException();
         super.addObject(object);
     }
 

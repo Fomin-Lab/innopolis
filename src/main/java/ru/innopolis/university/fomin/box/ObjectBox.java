@@ -1,5 +1,7 @@
 package ru.innopolis.university.fomin.box;
 
+import ru.innopolis.university.fomin.math.IncompatibleTypesException;
+
 import java.util.*;
 
 public class ObjectBox {
@@ -9,7 +11,7 @@ public class ObjectBox {
         this.objectList = new ArrayList<Object>();
     }
 
-    public void addObject(Object object) {
+    public void addObject(Object object) throws IncompatibleTypesException {
         this.objectList.add(object);
     }
 
