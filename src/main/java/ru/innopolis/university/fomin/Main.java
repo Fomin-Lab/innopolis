@@ -47,10 +47,6 @@ public class Main {
     }
 
     private static int getRandomValue(int min, int max) {
-        int diff = max - min;
-        Random random = new Random();
-        int i = random.nextInt(diff + 1);
-        i += min;
-        return i;
+        return new Random().nextInt(max - min + 1) + min;
     }
 }
