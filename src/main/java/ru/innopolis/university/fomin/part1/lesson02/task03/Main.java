@@ -60,7 +60,7 @@ public class Main {
             put("Татьяна", new Sex(WOMAN));
             put("Екатерина", new Sex(WOMAN));
             put("Василий", new Sex(MAN));
-            put("Светалана", new Sex(WOMAN));
+            put("Светлана", new Sex(WOMAN));
         }};
 
         // Выбор случайного имени

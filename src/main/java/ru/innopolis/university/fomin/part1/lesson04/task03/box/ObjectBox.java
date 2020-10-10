@@ -1,4 +1,6 @@
-package ru.innopolis.university.fomin.part1.lesson04.task02.box;
+package ru.innopolis.university.fomin.part1.lesson04.task03.box;
+
+import ru.innopolis.university.fomin.part1.lesson04.task03.math.IncompatibleTypesException;
 
 import java.util.*;
 
@@ -19,7 +21,7 @@ public class ObjectBox {
     /**
      * @param object Object to add in collection
      */
-    public void addObject(Object object) {
+    public void addObject(Object object) throws IncompatibleTypesException {
         this.objectList.add(object);
     }
 
