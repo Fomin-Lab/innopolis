@@ -37,13 +37,6 @@ public class Main {
         return array;
     }
 
-    public static void printArray(int[] array) {
-        for (int i : array) {
-            System.out.println(i);
-        }
-        System.out.println();
-    }
-
     /**
      * @param value The number for which you want to calculate the square root
      * @return Square root of the number passed

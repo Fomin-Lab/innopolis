@@ -1,14 +1,20 @@
-package ru.innopolis.university.fomin;
+package ru.innopolis.university.fomin.part1.lesson02.task03;
 
-import ru.innopolis.university.fomin.algorithms.AlgorithmSort;
-import ru.innopolis.university.fomin.algorithms.BubbleSort;
-import ru.innopolis.university.fomin.algorithms.FastSort;
+import ru.innopolis.university.fomin.Utils;
+import ru.innopolis.university.fomin.part1.lesson02.task03.algorithms.AlgorithmSort;
+import ru.innopolis.university.fomin.part1.lesson02.task03.algorithms.BubbleSort;
+import ru.innopolis.university.fomin.part1.lesson02.task03.algorithms.FastSort;
+import ru.innopolis.university.fomin.part1.lesson02.task03.models.Person;
+import ru.innopolis.university.fomin.part1.lesson02.task03.models.Sex;
 
 import java.util.*;
 
-import static ru.innopolis.university.fomin.Sex.WOMAN;
-import static ru.innopolis.university.fomin.Sex.MAN;
+import static ru.innopolis.university.fomin.part1.lesson02.task03.models.Sex.WOMAN;
+import static ru.innopolis.university.fomin.part1.lesson02.task03.models.Sex.MAN;
 
+/**
+ * Class performs the task conditions lesson02.task03
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -21,12 +27,15 @@ public class Main {
         AlgorithmSort<Person> fastSort = new FastSort<>();
         fastSort.sort(persons2);
 
-        printList(persons1);
+        Utils.printList(persons1);
 
         System.out.println("Время выполнения (Пузырьком): " + bubbleSort.getTime() + "ms");
         System.out.println("Время выполнения (Быстрая сортировка): " + fastSort.getTime() + "ms");
     }
 
+    /**
+     * @return List of random persons
+     */
     private static List<Person> createPersons() {
         List<Person> list = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
@@ -35,6 +44,10 @@ public class Main {
         return list;
     }
 
+    /**
+     * Random generate person object
+     * @return Random person object
+     */
     private static Person makeRandomPerson() {
         // Таблица различных имен
         Map<String, Sex> names = new HashMap<String, Sex>() {{
@@ -54,13 +67,18 @@ public class Main {
         Random random = new Random();
         Map.Entry<String, Sex> entry = getEntryByIndex(names, random.nextInt(names.size()) );
 
-        // Случайные возраст
-        int age = getRandomValue(18, 45);
+        // Случайный возраст
+        int age = Utils.getRandomValue(18, 45);
 
         assert entry != null;
         return new Person(entry.getKey(), age, entry.getValue());
     }
 
+    /**
+     * @param names Map of names with sex
+     * @param index Needed index of entry
+     * @return Entry by index
+     */
     private static Map.Entry<String, Sex> getEntryByIndex(Map<String, Sex> names, int index) {
         int i = 0;
         for (Map.Entry<String, Sex> entry : names.entrySet()) {
@@ -71,19 +89,4 @@ public class Main {
         }
         return null;
     };
-
-    private static int getRandomValue(int min, int max) {
-        int diff = max - min;
-        Random random = new Random();
-        int i = random.nextInt(diff + 1);
-        i += min;
-        return i;
-    }
-
-    protected static void printList(List<Person> persons) {
-        for(Person person : persons) {
-            System.out.println(person.toString());
-        }
-        System.out.println();
-    }
 }

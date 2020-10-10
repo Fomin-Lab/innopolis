@@ -1,6 +1,6 @@
-package ru.innopolis.university.fomin;
+package ru.innopolis.university.fomin.part1.lesson02.task03.models;
 
-import ru.innopolis.university.fomin.algorithms.Sortable;
+import ru.innopolis.university.fomin.part1.lesson02.task03.algorithms.Sortable;
 
 public class Person implements Sortable<Person> {
     protected String name;

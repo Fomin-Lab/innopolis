@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin;
+package ru.innopolis.university.fomin.part1.lesson02.task03.models;
 
 public class Sex {
     public static String MAN = "MAN";

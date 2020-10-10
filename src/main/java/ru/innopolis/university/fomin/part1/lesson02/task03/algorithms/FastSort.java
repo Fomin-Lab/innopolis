@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.algorithms;
+package ru.innopolis.university.fomin.part1.lesson02.task03.algorithms;
 
 import java.util.Collections;
 import java.util.List;
