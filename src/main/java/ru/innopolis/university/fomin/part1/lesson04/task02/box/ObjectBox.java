@@ -1,38 +1,24 @@
-package ru.innopolis.university.fomin.part1.lesson04.task02.box;
+package ru.innopolis.university.fomin.box;
+
+import ru.innopolis.university.fomin.math.IncompatibleTypesException;
 
 import java.util.*;
 
-/**
- * ObjectBox class
- *
- */
 public class ObjectBox {
-    private List<Object> objectList;
+    protected List<Object> objectList;
 
-    /**
-     * Initial field class
-     */
     public ObjectBox() {
-        this.objectList = new ArrayList<>();
+        this.objectList = new ArrayList<Object>();
     }
 
-    /**
-     * @param object Object to add in collection
-     */
-    public void addObject(Object object) {
+    public void addObject(Object object) throws IncompatibleTypesException {
         this.objectList.add(object);
     }
 
-    /**
-     * @param object Object for remove from collection
-     */
     public void removeObject(Object object) {
         this.objectList.remove(object);
     }
 
-    /**
-     * Outputting elements to the console
-     */
     public void dump() {
         for (Object object : objectList) {
             System.out.print(object + "; ");
