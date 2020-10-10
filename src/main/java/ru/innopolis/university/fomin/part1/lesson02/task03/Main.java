@@ -18,7 +18,7 @@ import static ru.innopolis.university.fomin.part1.lesson02.task03.models.Sex.MAN
 public class Main {
 
     public static void main(String[] args) {
-        List<Person> persons1 = createPersons();
+        List<Person> persons1 = createPersons(1000);
         List<Person> persons2 = new ArrayList<>(persons1);
 
         AlgorithmSort<Person> bubbleSort = new BubbleSort<>();
@@ -36,9 +36,9 @@ public class Main {
     /**
      * @return List of random persons
      */
-    private static List<Person> createPersons() {
+    private static List<Person> createPersons(int size) {
         List<Person> list = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < size; i++) {
             list.add(makeRandomPerson());
         }
         return list;
