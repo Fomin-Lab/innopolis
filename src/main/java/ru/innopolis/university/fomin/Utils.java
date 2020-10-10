@@ -1,5 +1,6 @@
 package ru.innopolis.university.fomin;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -18,10 +19,7 @@ public class Utils {
         System.out.println();
     }
 
-    public static void printArray(int[] array) {
-        for (int i : array) {
-            System.out.println(i);
-        }
-        System.out.println();
+    public static void printArray(Object[] array) {
+        printList(Arrays.asList(array));
     }
 }
