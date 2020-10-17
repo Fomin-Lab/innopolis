@@ -2,6 +2,7 @@ package ru.innopolis.university.fomin;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -21,5 +22,12 @@ public class Utils {
 
     public static void printArray(Object[] array) {
         printList(Arrays.asList(array));
+    }
+
+    public static void printMap(Map<?, ?> map) {
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+            System.out.println(entry.getKey().toString() + ": " + entry.getValue().toString());
+        }
+        System.out.println();
     }
 }
