@@ -11,7 +11,7 @@ public class FactorialPool {
     /**
      * Divider for calculate count threads
      */
-    private static final int DIVIDER = 10;
+    private static final int DIVIDER = 100;
 
     /**
      * Result calculation
@@ -75,7 +75,7 @@ public class FactorialPool {
         for (int i = 1; i <= value; i += step) {
             int end = (i + step) - 1;
             if (end > value) end = value;
-            Thread t = createTread(i, end);
+            Thread t = createThread(i, end);
             t.start();
             threads.add(t);
         }
@@ -94,7 +94,7 @@ public class FactorialPool {
      * @param endValue End value for calculate factorial
      * @return Created thread
      */
-    private Thread createTread(final int startValue, final int endValue) {
+    private Thread createThread(final int startValue, final int endValue) {
         return new Thread(new Runnable() {
             @Override
             public void run() {

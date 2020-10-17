@@ -16,7 +16,7 @@ public class Main {
 
 
     public static void main(String[] args){
-        int value = 100999;
+        int value = 200000;
         calculationMainThread(value);
         calculationThreadPool(value);
         calculationExecutorService(value);
