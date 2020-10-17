@@ -71,7 +71,7 @@ public class TextGenerator {
             }
         }
 
-        // в конце предложение ставим один из знаков (.|?|!)
+        // в конце предложения ставим один из знаков (.|?|!)
         result.append(getRandomPunctuationMark()).append(" ");
 
         return result.toString();

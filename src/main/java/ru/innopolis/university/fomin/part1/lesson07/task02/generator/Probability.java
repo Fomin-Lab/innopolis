@@ -67,7 +67,7 @@ public class Probability {
         while (matcher.find()) {
             String word = matcher.group();
             int percentProbability = getPercentProbabilityWord(word);
-            // Слова которые повторятся в следующем абзаце с вероятность 0 - не учитываем
+            // Слова которые повторятся в следующем абзаце с вероятностью 0% - не учитываем
             if (percentProbability > 0) {
                 percentProbabilityAndWords.put(word, percentProbability);
             }
