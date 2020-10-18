@@ -29,14 +29,14 @@ public class Probability {
     }
 
     /**
-     * @return Paragraph
+     * @return Text
      */
     public String getText() {
         return text;
     }
 
     /**
-     * @param text Paragraph to analyse
+     * @param text Text to analyse
      */
     public void setText(String text) {
         this.text = text;
