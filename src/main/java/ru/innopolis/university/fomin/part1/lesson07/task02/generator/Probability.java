@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
  */
 public class Probability {
     /**
-     * Preview paragraph
+     * Preview text
      */
-    protected String paragraph;
+    protected String text;
 
     /**
      * Map of words and probability
@@ -20,7 +20,7 @@ public class Probability {
 
     /**
      * Очередь которую будем освобождать при генерации следующего
-     * параграфа. Очередь хранит слова из предыдущего абзаца со значениями вероятности.
+     * предложения. Очередь хранит слова из предыдущего предложения со значениями вероятности.
      */
     protected Queue<Map.Entry<String, Integer>> queueWords;
 
@@ -31,16 +31,16 @@ public class Probability {
     /**
      * @return Paragraph
      */
-    public String getParagraph() {
-        return paragraph;
+    public String getText() {
+        return text;
     }
 
     /**
-     * @param paragraph Paragraph to analyse
+     * @param text Paragraph to analyse
      */
-    public void setParagraph(String paragraph) {
-        this.paragraph = paragraph;
-        getWordsWithProbability(paragraph);
+    public void setText(String text) {
+        this.text = text;
+        getWordsWithProbability(text);
     }
 
     /**
@@ -59,15 +59,15 @@ public class Probability {
 
     /**
      * Make list of words with random probability
-     * @param paragraph Paragraph
+     * @param text Paragraph
      */
-    private void getWordsWithProbability(String paragraph) {
+    private void getWordsWithProbability(String text) {
         Pattern pattern = Pattern.compile("[A-zА-я]+");
-        Matcher matcher = pattern.matcher(paragraph);
+        Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
             String word = matcher.group();
             int percentProbability = getPercentProbabilityWord(word);
-            // Слова которые повторятся в следующем абзаце с вероятностью 0% - не учитываем
+            // Слова которые повторятся в следующем предложении с вероятностью 0% - не учитываем
             if (percentProbability > 0) {
                 percentProbabilityAndWords.put(word, percentProbability);
             }

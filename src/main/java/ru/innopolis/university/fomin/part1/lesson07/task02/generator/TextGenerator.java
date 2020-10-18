@@ -71,6 +71,11 @@ public class TextGenerator {
             }
         }
 
+        // Сохраняем предложение для учета вероятности слов
+        if (probability != null) {
+            probability.setText(result.toString());
+        }
+
         // в конце предложения ставим один из знаков (.|?|!)
         result.append(getRandomPunctuationMark()).append(" ");
 
@@ -86,11 +91,6 @@ public class TextGenerator {
 
         for (int i = 0; i < countSentence; i++) {
             result.append(makeSentence(Utils.getRandomValue(1, 15)));
-        }
-
-        // Сохраняем параграф для учета вероятности слов
-        if (probability != null) {
-            probability.setParagraph(result.toString());
         }
 
         result.append("\r\n");
