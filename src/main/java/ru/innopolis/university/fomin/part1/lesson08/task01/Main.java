@@ -15,7 +15,7 @@ import java.util.concurrent.*;
 public class Main {
 
     public static void main(String[] args){
-        int value = 120000;
+        int value = 173984;
         calculationMainThread(value);
         calculationThreadPool(value);
         calculationExecutorService(value);
@@ -83,6 +83,7 @@ public class Main {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+
         service.shutdown();
     }
 
@@ -94,6 +95,10 @@ public class Main {
         return HardMath.factorial(1, value);
     }
 
+    /**
+     * @param value BigInteger for printing
+     * @param bound Number of digits to print
+     */
     private static void printBigInteger(BigInteger value, int bound) {
         if (value.toString().length() > bound) {
             System.out.println(value.toString().substring(0, bound) + "...");
