@@ -14,9 +14,8 @@ import java.util.concurrent.*;
  */
 public class Main {
 
-
     public static void main(String[] args){
-        int value = 200000;
+        int value = 120000;
         calculationMainThread(value);
         calculationThreadPool(value);
         calculationExecutorService(value);
@@ -33,7 +32,7 @@ public class Main {
         ExecuteTimer.endTimer();
 
         System.out.println("Результат в одном потоке получен через " + ExecuteTimer.getTime());
-        System.out.println(resultInSingleThread);
+        printBigInteger(resultInSingleThread, 1000);
         System.out.println();
     }
 
@@ -50,7 +49,7 @@ public class Main {
 
         System.out.println("Результат используя пул-потоков был получен через " + ExecuteTimer.getTime());
         System.out.println("Было создано потоков для расчета: " + factorialPool.countThreads());
-        System.out.println(resultInPoolThreads);
+        printBigInteger(resultInPoolThreads, 1000);
     }
 
     /**
@@ -79,8 +78,7 @@ public class Main {
         try {
             System.out.println("\nРасчет факториалов используя executor service");
             for (Future<BigInteger> future : futures) {
-                BigInteger result = future.get();
-                System.out.println(result);
+                printBigInteger(future.get(), 1000);
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -94,5 +92,13 @@ public class Main {
      */
     private static BigInteger calculateFactorialInSingleMainThread(final int value) {
         return HardMath.factorial(1, value);
+    }
+
+    private static void printBigInteger(BigInteger value, int bound) {
+        if (value.toString().length() > bound) {
+            System.out.println(value.toString().substring(0, bound) + "...");
+        } else {
+            System.out.println(value);
+        }
     }
 }
