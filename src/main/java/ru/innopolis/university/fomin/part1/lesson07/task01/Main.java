@@ -25,8 +25,7 @@ public class Main {
     public static Set<String> getSortedWordsInFile(String filename) {
         Set<String> words = new TreeSet<>();
 
-        try {
-            FileInputStream fis = new FileInputStream(filename);
+        try (FileInputStream fis = new FileInputStream(filename)) {
             Scanner scanner = new Scanner(fis);
 
             Pattern pattern = Pattern.compile("[А-яA-z]+");
@@ -39,8 +38,6 @@ public class Main {
                     words.add(s);
                 }
             }
-
-            fis.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
