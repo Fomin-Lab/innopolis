@@ -85,9 +85,9 @@ public class TextGenerator {
                 result.append(word);
             }
 
-            // С вероятностью 1% вставляем запятую после слова, кроме последнего
+            // С вероятностью 10% вставляем запятую после слова, кроме последнего
             if (!isLastItem(i, countWords)) {
-                if (random.nextInt(100) == 1) {
+                if (random.nextInt(100) < 10) {
                     result.append(", ");
                 } else {
                     result.append(" ");

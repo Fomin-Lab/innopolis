@@ -41,7 +41,7 @@ public class Probability {
      */
     public void setText(String text) {
         this.text = text;
-        queueWords = new LinkedList<>();
+        queueWords.clear();
         getWordsWithProbability(text);
     }
 
