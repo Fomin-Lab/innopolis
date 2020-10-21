@@ -13,6 +13,11 @@ import java.util.concurrent.*;
  * Class performs the task conditions lesson08.task01
  */
 public class Main {
+    /**
+     * Max number of digits for printing BigInteger value
+     * Needed because if print very big value in console then deleted first lines
+     */
+    private static final int BIGINTEGER_MAX_SIZE = 1000;
 
     public static void main(String[] args){
         int value = 173984;
@@ -32,7 +37,7 @@ public class Main {
         ExecuteTimer.endTimer();
 
         System.out.println("Результат в одном потоке получен через " + ExecuteTimer.getTime());
-        printBigInteger(resultInSingleThread, 1000);
+        printBigInteger(resultInSingleThread);
         System.out.println();
     }
 
@@ -49,7 +54,7 @@ public class Main {
 
         System.out.println("Результат используя пул-потоков был получен через " + ExecuteTimer.getTime());
         System.out.println("Было создано потоков для расчета: " + factorialPool.countThreads());
-        printBigInteger(resultInPoolThreads, 1000);
+        printBigInteger(resultInPoolThreads);
     }
 
     /**
@@ -61,13 +66,12 @@ public class Main {
         ExecutorService service = Executors.newCachedThreadPool();
 
         // Создаём 5 задач для расчета факториала
-        List<Callable<BigInteger>> tasks = new ArrayList<Callable<BigInteger>>() {{
-            add(new FactorialCallable(9));
-            add(new FactorialCallable(12));
-            add(new FactorialCallable(111));
-            add(new FactorialCallable(value));
-            add(new FactorialCallable(3));
-        }};
+        List<Callable<BigInteger>> tasks = new ArrayList<>();
+        tasks.add(new FactorialCallable(9));
+        tasks.add(new FactorialCallable(12));
+        tasks.add(new FactorialCallable(111));
+        tasks.add(new FactorialCallable(value));
+        tasks.add(new FactorialCallable(3));
 
         List<Future<BigInteger>> futures = new ArrayList<>();
 
@@ -78,7 +82,7 @@ public class Main {
         try {
             System.out.println("\nРасчет факториалов используя executor service");
             for (Future<BigInteger> future : futures) {
-                printBigInteger(future.get(), 1000);
+                printBigInteger(future.get());
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -88,6 +92,8 @@ public class Main {
     }
 
     /**
+     * Simple calculating factorial in one thread
+     *
      * @param value Value for calculation
      * @return Factorial
      */
@@ -96,12 +102,13 @@ public class Main {
     }
 
     /**
+     * Printing biginteger value with max length
+     *
      * @param value BigInteger for printing
-     * @param bound Number of digits to print
      */
-    private static void printBigInteger(BigInteger value, int bound) {
-        if (value.toString().length() > bound) {
-            System.out.println(value.toString().substring(0, bound) + "...");
+    private static void printBigInteger(BigInteger value) {
+        if (value.toString().length() > BIGINTEGER_MAX_SIZE) {
+            System.out.println(value.toString().substring(0, BIGINTEGER_MAX_SIZE) + "...");
         } else {
             System.out.println(value);
         }

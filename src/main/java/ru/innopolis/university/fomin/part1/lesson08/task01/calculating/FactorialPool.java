@@ -34,6 +34,8 @@ public class FactorialPool {
     private final Object locker = new Object();
 
     /**
+     * Constructor with initialize class fields
+     *
      * @param value Source value
      */
     public FactorialPool(int value) {
@@ -43,6 +45,8 @@ public class FactorialPool {
     }
 
     /**
+     * Do calculate factorial
+     *
      * @return Calculated factorial
      */
     public BigInteger calculate() {
@@ -51,6 +55,8 @@ public class FactorialPool {
     }
 
     /**
+     * Number of created threads for calculating
+     *
      * @return Number of threads
      */
     public int countThreads() {
@@ -59,19 +65,18 @@ public class FactorialPool {
 
     /**
      * Calculating factorial with create threads
+     *
+     * Example: На вход получаем число 9, DIVIDER = 3
+     *          Тогда создаем 3 потока.
+     *          Первый поток рассчитывает факториал числа 3
+     *          Второй поток рассчитывает факториал числа 6, исключая факториал 3 (т.е. 4*5*6)
+     *          Третий поток рассчитывает факториал числа 9, исключая факториал 6 (т.е. 7*8*9)
+     *          По завершению все значения "склеиваются" т.е. перемножаются, результат записывается в переменную this.result
      */
     private void calculateFactorial() {
         int parts = value / DIVIDER;
         int step = parts == 0 ? value : DIVIDER;
 
-        /*
-            Например: На вход получаем число 9, DIVIDER = 3
-            Тогда создаем 3 потока.
-            Первый поток рассчитывает факториал числа 3
-            Второй поток рассчитывает факториал числа 6, исключая факториал 3 (т.е. 4*5*6)
-            Третий поток рассчитывает факториал числа 9, исключая факториал 6 (т.е. 7*8*9)
-            По завершению все значения "склеиваются" т.е. перемножаются, результат записывается в переменную this.result
-         */
         for (int i = 1; i <= value; i += step) {
             int end = (i + step) - 1;
             if (end > value) end = value;
@@ -84,12 +89,16 @@ public class FactorialPool {
             try {
                 t.join();
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 e.printStackTrace();
             }
         }
     }
 
     /**
+     * Create one thread for calculating factorial between @startValue and @endValue
+     * Total result update only one thread in synchronized section
+     *
      * @param startValue Start value for calculate factorial
      * @param endValue End value for calculate factorial
      * @return Created thread
@@ -98,8 +107,9 @@ public class FactorialPool {
         return new Thread(new Runnable() {
             @Override
             public void run() {
+                BigInteger resultPart = HardMath.factorial(startValue, endValue);
                 synchronized (locker) {
-                    result = result.multiply(HardMath.factorial(startValue, endValue));
+                    result = result.multiply(resultPart);
                 }
             }
         });

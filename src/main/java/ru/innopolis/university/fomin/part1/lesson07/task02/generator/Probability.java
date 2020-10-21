@@ -51,10 +51,11 @@ public class Probability {
     }
 
     /**
+     * Recognize about is empty queue or not
      * @return true if probability loaded
      */
     public boolean isLoaded() {
-        return queueWords != null && queueWords.size() > 0;
+        return !queueWords.isEmpty();
     }
 
     /**
@@ -66,7 +67,7 @@ public class Probability {
         Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
             String word = matcher.group();
-            int percentProbability = getPercentProbabilityWord(word);
+            int percentProbability = getPercentProbabilityWord();
             // Слова которые повторятся в следующем предложении с вероятностью 0% - не учитываем
             if (percentProbability > 0) {
                 percentProbabilityAndWords.put(word, percentProbability);
@@ -77,10 +78,9 @@ public class Probability {
     }
 
     /**
-     * @param word Word for make probability
      * @return Random probability
      */
-    private int getPercentProbabilityWord(String word) {
+    private int getPercentProbabilityWord() {
         return new Random().nextInt(100 + 1);
     }
 }
