@@ -9,7 +9,7 @@ import ru.innopolis.university.fomin.part1.lesson07.task02.generator.TextGenerat
  */
 public class Main {
     public static void main(String[] args) {
-        TextGenerator generator = new TextGenerator(new Probability(), false);
+        TextGenerator generator = new TextGenerator(new Probability(), true);
 
         // Демонстрация генерации текста (от 2 до 5 абзацев)
         System.out.println(generator.makeText(Utils.getRandomValue(2, 5)));

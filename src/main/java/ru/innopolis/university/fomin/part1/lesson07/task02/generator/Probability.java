@@ -26,6 +26,7 @@ public class Probability {
 
     public Probability() {
         percentProbabilityAndWords = new HashMap<>();
+        queueWords = new LinkedList<>();
     }
 
     /**
@@ -40,6 +41,7 @@ public class Probability {
      */
     public void setText(String text) {
         this.text = text;
+        queueWords = new LinkedList<>();
         getWordsWithProbability(text);
     }
 
@@ -74,7 +76,7 @@ public class Probability {
             }
         }
 
-        queueWords = new LinkedList<>(percentProbabilityAndWords.entrySet());
+        queueWords.addAll(percentProbabilityAndWords.entrySet());
     }
 
     /**
