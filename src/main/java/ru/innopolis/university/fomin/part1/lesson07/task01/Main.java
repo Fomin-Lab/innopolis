@@ -52,13 +52,11 @@ public class Main {
      * @param filename Output filename
      */
     public static void writeSetToFile(Set<String> words, String filename) {
-        try {
-            FileOutputStream fos = new FileOutputStream(filename);
+        try (FileOutputStream fos = new FileOutputStream(filename)) {
             for (String word : words) {
                 fos.write(word.getBytes());
                 fos.write('\n');
             }
-            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
