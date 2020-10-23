@@ -104,13 +104,10 @@ public class FactorialPool {
      * @return Created thread
      */
     private Thread createThread(final int startValue, final int endValue) {
-        return new Thread(new Runnable() {
-            @Override
-            public void run() {
-                BigInteger resultPart = HardMath.factorial(startValue, endValue);
-                synchronized (locker) {
-                    result = result.multiply(resultPart);
-                }
+        return new Thread(() -> {
+            BigInteger resultPart = HardMath.factorial(startValue, endValue);
+            synchronized (locker) {
+                result = result.multiply(resultPart);
             }
         });
     }
