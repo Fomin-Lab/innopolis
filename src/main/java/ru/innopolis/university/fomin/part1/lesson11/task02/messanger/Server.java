@@ -14,6 +14,7 @@ import java.util.Map;
  * Use server socket
  * Class performs the task conditions lesson11.task02
  */
+@SuppressWarnings("Duplicates")
 public class Server {
     /**
      * Map of all connected users

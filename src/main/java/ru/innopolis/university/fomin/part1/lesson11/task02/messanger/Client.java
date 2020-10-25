@@ -11,6 +11,7 @@ import java.util.Scanner;
  *
  * For create more then one client set "Allow parallel run" option on run/debug configurations settings
  */
+@SuppressWarnings("Duplicates")
 public class Client {
     /**
      * Port to connect socket
