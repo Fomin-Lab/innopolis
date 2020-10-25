@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Class Client
  * Use client socket
- * Class performs the task conditions lesson11.task01
+ * Class performs the task conditions lesson11.task02
  *
  * For create more then one client set "Allow parallel run" option on run/debug configurations settings
  */

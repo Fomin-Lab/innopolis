@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Class Server
  * Use server socket
- * Class performs the task conditions lesson11.task01
+ * Class performs the task conditions lesson11.task02
  */
 public class Server {
     /**
