@@ -85,6 +85,7 @@ public class Main {
                 printBigInteger(future.get());
             }
         } catch (InterruptedException | ExecutionException e) {
+            Thread.currentThread().interrupt();
             e.printStackTrace();
         }
 
