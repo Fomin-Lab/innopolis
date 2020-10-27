@@ -1,5 +1,8 @@
 package ru.innopolis.university.fomin.part1.lesson11.task02.messanger;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -13,6 +16,11 @@ import java.util.Scanner;
  */
 @SuppressWarnings("Duplicates")
 public class Client {
+    /**
+     * log4j logger
+     */
+    protected static final Logger logger = LogManager.getLogger(Client.class);
+
     /**
      * Port to connect socket
      */
@@ -60,7 +68,8 @@ public class Client {
                     try {
                         System.out.println("Входящее сообщение: " + reader.readLine());
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        logger.error(e);
+                        Thread.currentThread().interrupt();
                     }
                 }
             });

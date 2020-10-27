@@ -1,5 +1,8 @@
 package ru.innopolis.university.fomin.part1.lesson11.task01.messanger;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +17,13 @@ import java.util.Map;
  * Use server socket
  * Class performs the task conditions lesson11.task01
  */
+@SuppressWarnings("Duplicates")
 public class Server {
+    /**
+     * log4j logger
+     */
+    protected static final Logger logger = LogManager.getLogger(Server.class);
+
     /**
      * Map of all connected users
      */
@@ -51,7 +60,8 @@ public class Server {
      *         If an I/O error occurs
      */
     private static void runServer() throws IOException {
-        System.out.println("Server start");
+        logger.info("Server start");
+
         ServerSocket serverSocket = new ServerSocket(LISTEN_PORT);
 
         while (isListening) {
@@ -63,7 +73,7 @@ public class Server {
                     reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 } catch (IOException e) {
                     Thread.currentThread().interrupt();
-                    e.printStackTrace();
+                    logger.error(e);
                 }
 
                 // Ожидаем ввод имени от клиента
@@ -73,10 +83,10 @@ public class Server {
                     userName = reader.readLine();
                 } catch (IOException e) {
                     Thread.currentThread().interrupt();
-                    e.printStackTrace();
+                    logger.error(e);
                 }
 
-                System.out.println("Подключился - " + userName);
+                logger.info("Подключился - " + userName);
 
                 // Сохраняем подключение в колекцию
                 synchronized (users) {
@@ -88,11 +98,11 @@ public class Server {
                     try {
                         String line = reader.readLine();
                         if (line == null) continue;
-                        System.out.println(userName + " отправил: " + line);
+                        logger.info(userName + " отправил: " + line);
                         sendBroadCast(userName, line);
                     } catch (IOException e) {
                         Thread.currentThread().interrupt();
-                        e.printStackTrace();
+                        logger.error(e);
                         break;
                     }
                 }
