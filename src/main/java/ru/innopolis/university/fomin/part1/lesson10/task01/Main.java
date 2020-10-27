@@ -1,10 +1,14 @@
 package ru.innopolis.university.fomin.part1.lesson10.task01;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Collections;
 
@@ -12,6 +16,11 @@ import java.util.Collections;
  * Class performs the task conditions lesson10.task01
  */
 public class Main {
+    /**
+     * log4j logger
+     */
+    protected static final Logger logger = LogManager.getLogger(Main.class);
+
     /**
      * Template for SomeClass which auto-generate with entered code from console
      */
@@ -71,8 +80,7 @@ public class Main {
         try (
                 BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(inputUrl.getPath()
-                            )
+                            new FileInputStream(inputUrl.getPath())
                     )
                 );
 
@@ -94,7 +102,7 @@ public class Main {
             compileClassInRuntime();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 
@@ -106,10 +114,10 @@ public class Main {
 
         try {
             final Class<?> someClass = Class.forName("SomeClass", true, someClassLoader);
-            Worker instance = (Worker) someClass.newInstance();
+            Worker instance = (Worker) someClass.getDeclaredConstructor().newInstance();
             instance.doWork();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            logger.error(e);
         }
     }
 
@@ -130,7 +138,7 @@ public class Main {
         try {
             fileManager.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
     }
 }
