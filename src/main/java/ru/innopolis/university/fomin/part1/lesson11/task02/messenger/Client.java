@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson11.task02.messanger;
+package ru.innopolis.university.fomin.part1.lesson11.task02.messenger;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
