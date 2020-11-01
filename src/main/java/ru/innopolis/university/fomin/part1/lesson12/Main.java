@@ -76,19 +76,16 @@ public class Main {
         }};
 
         // Выбор случайного имени
-        Random random = new Random();
-
         // use stream api
         Map.Entry<String, Sex> entry = names.entrySet()
                 .stream()
-                .skip(random.nextInt(names.size() - 1))
+                .skip(new Random().nextInt(names.size() - 1))
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
 
         // Случайный возраст
         int age = Utils.getRandomValue(18, 45);
 
-        assert entry != null;
         return new Person(entry.getKey(), age, entry.getValue());
     }
 }
