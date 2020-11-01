@@ -37,6 +37,7 @@ public class Main {
     /**
      * Entry point
      * Infinite creation classes in loop with throw OutOfMemoryError
+     * Maximum metaspace size should be 10Mb (-XX:MaxMetaspaceSize=10M)
      *
      * @param args Input args
      */

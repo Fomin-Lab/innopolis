@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Class performs the task conditions lesson13 task
- * Start with VM Options: -Xmx25M -Xloggc:memory_lesson13GC.log -XX:+PrintGCDetails
+ * Start with VM Options: -Xmx25M -Xloggc:memory_lesson13GC.log
  */
 public class Main {
     /**
