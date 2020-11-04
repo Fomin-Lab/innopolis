@@ -5,11 +5,11 @@ import ru.innopolis.university.fomin.part1.lesson02.task03.models.Sex;
 /**
  * Composition of name and gender
  */
-public class PersonName {
+public class GenderName {
     protected String name;
     protected Sex sex;
 
-    public PersonName(String name, Sex sex) {
+    public GenderName(String name, Sex sex) {
         this.name = name;
         this.sex = sex;
     }

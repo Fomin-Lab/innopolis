@@ -6,7 +6,7 @@ import ru.innopolis.university.fomin.part1.lesson02.task03.algorithms.BubbleSort
 import ru.innopolis.university.fomin.part1.lesson02.task03.algorithms.FastSort;
 import ru.innopolis.university.fomin.part1.lesson02.task03.models.Person;
 import ru.innopolis.university.fomin.part1.lesson02.task03.models.Sex;
-import ru.innopolis.university.fomin.part1.lesson12.models.PersonName;
+import ru.innopolis.university.fomin.part1.lesson12.models.GenderName;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,20 +30,20 @@ public class Main {
     /**
      * List of names
      */
-    protected static List<PersonName> dictionaryNames = new ArrayList<>();
+    protected static List<GenderName> dictionaryNamesWithGender = new ArrayList<>();
 
     static {
         // Список различных имен
-        dictionaryNames.add(new PersonName("Андрей", new Sex(MAN)));
-        dictionaryNames.add(new PersonName("Антон", new Sex(MAN)));
-        dictionaryNames.add(new PersonName("Аркадий", new Sex(MAN)));
-        dictionaryNames.add(new PersonName("Денис", new Sex(MAN)));
-        dictionaryNames.add(new PersonName("Анна", new Sex(WOMAN)));
-        dictionaryNames.add(new PersonName("Анастасия", new Sex(WOMAN)));
-        dictionaryNames.add(new PersonName("Татьяна", new Sex(WOMAN)));
-        dictionaryNames.add(new PersonName("Екатерина", new Sex(WOMAN)));
-        dictionaryNames.add(new PersonName("Василий", new Sex(MAN)));
-        dictionaryNames.add(new PersonName("Светлана", new Sex(WOMAN)));
+        dictionaryNamesWithGender.add(new GenderName("Андрей", new Sex(MAN)));
+        dictionaryNamesWithGender.add(new GenderName("Антон", new Sex(MAN)));
+        dictionaryNamesWithGender.add(new GenderName("Аркадий", new Sex(MAN)));
+        dictionaryNamesWithGender.add(new GenderName("Денис", new Sex(MAN)));
+        dictionaryNamesWithGender.add(new GenderName("Анна", new Sex(WOMAN)));
+        dictionaryNamesWithGender.add(new GenderName("Анастасия", new Sex(WOMAN)));
+        dictionaryNamesWithGender.add(new GenderName("Татьяна", new Sex(WOMAN)));
+        dictionaryNamesWithGender.add(new GenderName("Екатерина", new Sex(WOMAN)));
+        dictionaryNamesWithGender.add(new GenderName("Василий", new Sex(MAN)));
+        dictionaryNamesWithGender.add(new GenderName("Светлана", new Sex(WOMAN)));
     }
 
     /**
@@ -80,15 +80,15 @@ public class Main {
      * @return Random person object
      */
     private static Person makeRandomPerson() {
-        // Меняем PersonName на Person и возвращаем случайный объект Person
+        // Меняем GenderName на Person и возвращаем случайный объект Person
         // use stream api
-        return dictionaryNames.stream()
-                .map(personName -> new Person(
-                        personName.getName(),
+        return dictionaryNamesWithGender.stream()
+                .map(genderName -> new Person(
+                        genderName.getName(),
                         Utils.getRandomValue(18, 45),
-                        personName.getSex())
+                        genderName.getSex())
                 )
-                .skip(new Random().nextInt(dictionaryNames.size() - 1))
+                .skip(new Random().nextInt(dictionaryNamesWithGender.size() - 1))
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
     }
