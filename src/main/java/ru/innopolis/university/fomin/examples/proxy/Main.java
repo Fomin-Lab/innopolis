@@ -19,7 +19,7 @@ public class Main {
     private static Object getProxyObject() {
         final ClassLoader classLoader = Main.class.getClassLoader();
 
-        Class[] interfaces = { Buyable.class, Printable.class };
+        Class<?>[] interfaces = { Buyable.class, Printable.class };
 
         InvocationHandler myHandler = new InvocationHandler() {
 
@@ -28,9 +28,9 @@ public class Main {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 System.out.printf("Start invoking operation %s\n", method.getName());
-                method.invoke(originalObject, args);
+                Object object = method.invoke(originalObject, args);
                 System.out.printf("Finish invoking operation %s\n", method.getName());
-                return null;
+                return object;
             }
         };
 
