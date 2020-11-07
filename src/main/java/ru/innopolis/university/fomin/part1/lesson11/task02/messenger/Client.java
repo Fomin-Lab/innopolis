@@ -19,12 +19,12 @@ public class Client {
     /**
      * log4j logger
      */
-    protected static final Logger logger = LogManager.getLogger(Client.class);
+    protected static final Logger LOGGER = LogManager.getLogger(Client.class);
 
     /**
      * Port to connect socket
      */
-    protected static int CONNECT_PORT = 20323;
+    protected static final int CONNECT_PORT = 20323;
 
     /**
      * Entry point
@@ -68,7 +68,7 @@ public class Client {
                     try {
                         System.out.println("Входящее сообщение: " + reader.readLine());
                     } catch (IOException e) {
-                        logger.error(e);
+                        LOGGER.error(e);
                         Thread.currentThread().interrupt();
                     }
                 }
@@ -76,11 +76,17 @@ public class Client {
 
             listenIncomingMessages.start();
 
+            /*
+                Примеры:
+                    dima Hello! - личное сообщение пользователю dima (Unicast)
+                    Good morning! - сообщение всем (Broadcast)
+                    quit - выход из чата
+             */
             // Отправляем сообщения
             while (true) {
                 String line = console.nextLine();
                 out.println(line);
-                if ("exit".equals(line)) {
+                if ("quit".equals(line)) {
                     socket.close();
                     listenIncomingMessages.interrupt();
                     break;

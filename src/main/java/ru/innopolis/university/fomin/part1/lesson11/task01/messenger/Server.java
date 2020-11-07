@@ -22,22 +22,22 @@ public class Server {
     /**
      * log4j logger
      */
-    protected static final Logger logger = LogManager.getLogger(Server.class);
+    protected static final Logger LOGGER = LogManager.getLogger(Server.class);
+
+    /**
+     * Listen port
+     */
+    protected static final int LISTEN_PORT = 20323;
 
     /**
      * Map of all connected users
      */
-    protected static final Map<String, Socket> users = new HashMap<>();
+    protected static Map<String, Socket> users = new HashMap<>();
 
     /**
      * if listen client connections
      */
     protected static boolean isListening = true;
-
-    /**
-     * Listen port
-     */
-    protected static int LISTEN_PORT = 20323;
 
     /**
      * Entry point
@@ -60,7 +60,7 @@ public class Server {
      *         If an I/O error occurs
      */
     private static void runServer() throws IOException {
-        logger.info("Server start");
+        LOGGER.info("Server start");
 
         ServerSocket serverSocket = new ServerSocket(LISTEN_PORT);
 
@@ -73,7 +73,7 @@ public class Server {
                     reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 } catch (IOException e) {
                     Thread.currentThread().interrupt();
-                    logger.error(e);
+                    LOGGER.error(e);
                 }
 
                 // Ожидаем ввод имени от клиента
@@ -83,13 +83,13 @@ public class Server {
                     userName = reader.readLine();
                 } catch (IOException e) {
                     Thread.currentThread().interrupt();
-                    logger.error(e);
+                    LOGGER.error(e);
                 }
 
-                logger.info("Подключился - " + userName);
+                LOGGER.info("Подключился - " + userName);
 
                 // Сохраняем подключение в колекцию
-                synchronized (users) {
+                synchronized (Server.class) {
                     users.put(userName, socket);
                 }
 
@@ -98,11 +98,11 @@ public class Server {
                     try {
                         String line = reader.readLine();
                         if (line == null) continue;
-                        logger.info(userName + " отправил: " + line);
+                        LOGGER.info(userName + " отправил: " + line);
                         sendBroadCast(userName, line);
                     } catch (IOException e) {
                         Thread.currentThread().interrupt();
-                        logger.error(e);
+                        LOGGER.error(e);
                         break;
                     }
                 }

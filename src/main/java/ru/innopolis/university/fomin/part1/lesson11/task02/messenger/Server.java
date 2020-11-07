@@ -22,22 +22,22 @@ public class Server {
     /**
      * log4j logger
      */
-    protected static final Logger logger = LogManager.getLogger(Server.class);
+    protected static final Logger LOGGER = LogManager.getLogger(Server.class);
+
+    /**
+     * Listen port
+     */
+    protected static final int LISTEN_PORT = 20323;
 
     /**
      * Map of all connected users
      */
-    protected static final Map<String, Socket> users = new HashMap<>();
+    protected static Map<String, Socket> users = new HashMap<>();
 
     /**
      * if listen client connections
      */
     protected static boolean isListening = true;
-
-    /**
-     * Listen port
-     */
-    protected static int LISTEN_PORT = 20323;
 
     /**
      * Entry point
@@ -60,7 +60,7 @@ public class Server {
      *         If an I/O error occurs
      */
     private static void runServer() throws IOException {
-        logger.info("Server start");
+        LOGGER.info("Server start");
         ServerSocket serverSocket = new ServerSocket(LISTEN_PORT);
 
         while (isListening) {
@@ -72,7 +72,7 @@ public class Server {
                     reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 } catch (IOException e) {
                     Thread.currentThread().interrupt();
-                    logger.error(e);
+                    LOGGER.error(e);
                 }
 
                 // Ожидаем ввод имени от клиента
@@ -82,13 +82,13 @@ public class Server {
                     userName = reader.readLine();
                 } catch (IOException e) {
                     Thread.currentThread().interrupt();
-                    logger.error(e);
+                    LOGGER.error(e);
                 }
 
-                logger.info("Подключился - " + userName);
+                LOGGER.info("Подключился - " + userName);
 
-                // Сохраняем подключение в колекцию
-                synchronized (users) {
+                // Сохраняем подключение в коллекцию
+                synchronized (Server.class) {
                     users.put(userName, socket);
                 }
 
@@ -97,12 +97,13 @@ public class Server {
                     try {
                         String line = reader.readLine();
                         if (line == null) continue;
-                        if (line.equals("exit")) {
+                        if (line.equals("quit")) {
+                            LOGGER.info(userName + " пользователь вышел из чата");
                             socket.close();
                             break;
                         }
 
-                        logger.info(userName + " отправил: " + line);
+                        LOGGER.info(userName + " отправил: " + line);
 
                         if (checkOnUniCastMessage(line)) {
                             String destinationName = line.substring(0, line.indexOf(' '));
@@ -113,7 +114,7 @@ public class Server {
                         }
                     } catch (IOException e) {
                         Thread.currentThread().interrupt();
-                        logger.error(e);
+                        LOGGER.error(e);
                         break;
                     }
                 }
@@ -180,7 +181,7 @@ public class Server {
                 Socket clientSocket = entry.getValue();
                 if (clientSocket.isConnected()) {
                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                    out.println(user + " отправил вам сообщение: " + message);
+                    out.println(user + " отправил сообщение всем: " + message);
                 }
             }
         }

@@ -86,8 +86,8 @@ public class Main {
                 .map(genderName -> new Person(
                         genderName.getName(),
                         Utils.getRandomValue(18, 45),
-                        genderName.getSex())
-                )
+                        genderName.getSex()
+                ))
                 .skip(new Random().nextInt(dictionaryNamesWithGender.size() - 1))
                 .findFirst()
                 .orElseThrow(NullPointerException::new);
