@@ -27,7 +27,7 @@ public class Main {
         Animal animalSkoda = new Animal(CardFiles.getIdentifier(), "Шкода", ownerKatya, 0.05f);
         // Пиранья Тайсон
         Animal animalTaison = new Animal(CardFiles.getIdentifier(), "Тайсон", ownerAnton, 0.1f);
-        // Пиранья Пушок
+        // Пиранья Пират
         Animal animalPirat = new Animal(CardFiles.getIdentifier(), "Пират", ownerAnton, 0.1f);
 
         // Демонстрация добавления животного в картотеку
