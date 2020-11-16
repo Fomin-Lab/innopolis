@@ -15,22 +15,38 @@ public class DatabaseUtil {
      */
     public static void main(String[] args) {
         renewDatabase();
+        renewTables();
     }
 
     /**
-     * Create/Recreate tables for blog
+     * Create/Recreate blog database
      */
     public static void renewDatabase() {
+        try (Connection connection = DriverManager.getConnection(
+                "jdbc:postgresql://localhost:5433/",
+                "postgres",
+                "qwerty");
+             Statement statement = connection.createStatement();
+        ) {
+            // База данных
+            statement.execute("DROP DATABASE IF EXISTS db_blog;\n"
+                    + "CREATE DATABASE db_blog;\n"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create/Recreate blog tables
+     */
+    public static void renewTables() {
         try (Connection connection = DriverManager.getConnection(
                 "jdbc:postgresql://localhost:5433/db_blog",
                 "postgres",
                 "qwerty");
              Statement statement = connection.createStatement();
         ) {
-            // База данных
-            //statement.execute("DROP DATABASE IF EXISTS db_blog;\n"
-            //       + "CREATE DATABASE db_blog;\n");
-
             // Таблица ролей
             statement.execute("DROP TABLE IF EXISTS bg_roles;\n"
                     + "CREATE TABLE bg_roles (\n"
