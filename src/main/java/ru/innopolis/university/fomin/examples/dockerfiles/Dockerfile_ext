@@ -1,0 +1,5 @@
+FROM java:8-jdk-alpine
+VOLUME /home/docex
+COPY target/innopolis-1.0-SNAPSHOT.jar /home/docex
+WORKDIR /home/docex
+ENTRYPOINT ["java", "-jar", "innopolis-1.0-SNAPSHOT.jar"]
