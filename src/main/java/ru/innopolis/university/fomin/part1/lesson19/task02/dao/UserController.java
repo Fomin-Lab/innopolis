@@ -1,7 +1,6 @@
 package ru.innopolis.university.fomin.part1.lesson19.task02.dao;
 
 import ru.innopolis.university.fomin.part1.lesson19.task01.scheme.BlogDbScheme;
-import ru.innopolis.university.fomin.part1.lesson19.task02.model.ArticleModel;
 import ru.innopolis.university.fomin.part1.lesson19.task02.model.UserModel;
 
 import java.sql.Connection;
@@ -65,7 +64,7 @@ public class UserController extends AbstractController<UserModel> {
      */
     @Override
     protected UserModel createModel(ResultSet rs) throws SQLException {
-        return UserModel.createFromResultSet(rs);
+        return new UserModel(rs);
     }
 
     /**
@@ -77,13 +76,6 @@ public class UserController extends AbstractController<UserModel> {
      */
     @Override
     protected void loadToPreparedStatement(PreparedStatement ps, UserModel model, boolean updating) throws SQLException {
-        ps.setString(1, model.getLogin());
-        ps.setString(2, model.getName());
-        ps.setInt(3, model.getRoleId());
-        ps.setInt(4, model.getRate());
-
-        if (updating) {
-            ps.setInt(5, model.getId());
-        }
+        model.sendToPreparedStatement(ps, updating);
     }
 }

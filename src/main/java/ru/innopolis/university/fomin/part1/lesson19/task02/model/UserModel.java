@@ -25,6 +25,10 @@ public class UserModel extends AbstractModel {
         this.rate = rate;
     }
 
+    public UserModel(ResultSet rs) throws SQLException {
+        loadFromResultSet(rs);
+    }
+
     public int getId() {
         return id;
     }
@@ -77,17 +81,36 @@ public class UserModel extends AbstractModel {
     }
 
     /**
+     * Loading model from result set
+     *
      * @param rs ResultSet
-     * @return New model instance
      * @throws SQLException If occur sql exception
      */
-    public static UserModel createFromResultSet(ResultSet rs) throws SQLException {
-        UserModel model = new UserModel();
-        model.setId(rs.getInt(1));
-        model.setLogin(rs.getString(2));
-        model.setName(rs.getString(3));
-        model.setRoleId(rs.getInt(4));
-        model.setRate(rs.getInt(5));
-        return model;
+    public void loadFromResultSet(ResultSet rs) throws SQLException {
+        setId(rs.getInt(1));
+        setLogin(rs.getString(2));
+        setName(rs.getString(3));
+        setRoleId(rs.getInt(4));
+        setRate(rs.getInt(5));
+    }
+
+    /**
+     * Loading model into prepared statement
+     *
+     * @param ps PreparedStatement instance
+     * @param updating True if loading UPDATE query, false INSERT query.
+     *                 For UPDATE query need fill id param
+     * @throws SQLException If occur sql exception
+     */
+    @Override
+    public void sendToPreparedStatement(PreparedStatement ps, boolean updating) throws SQLException {
+        ps.setString(1, getLogin());
+        ps.setString(2, getName());
+        ps.setInt(3, getRoleId());
+        ps.setInt(4, getRate());
+
+        if (updating) {
+            ps.setInt(5, getId());
+        }
     }
 }

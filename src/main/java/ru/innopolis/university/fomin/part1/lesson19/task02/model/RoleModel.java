@@ -11,6 +11,16 @@ public class RoleModel extends AbstractModel {
     private int id;
     private String title;
 
+    public RoleModel() { }
+
+    public RoleModel(String title) {
+        this.title = title;
+    }
+
+    public RoleModel(ResultSet rs) throws SQLException {
+        loadFromResultSet(rs);
+    }
+
     public int getId() {
         return id;
     }
@@ -36,14 +46,30 @@ public class RoleModel extends AbstractModel {
     }
 
     /**
+     * Loading model from result set
+     *
      * @param rs ResultSet
-     * @return New model instance
      * @throws SQLException If occur sql exception
      */
-    public static RoleModel createFromResultSet(ResultSet rs) throws SQLException {
-        RoleModel model = new RoleModel();
-        model.setId(rs.getInt(1));
-        model.setTitle(rs.getString(2));
-        return model;
+    public void loadFromResultSet(ResultSet rs) throws SQLException {
+        setId(rs.getInt(1));
+        setTitle(rs.getString(2));
+    }
+
+    /**
+     * Loading model into prepared statement
+     *
+     * @param ps PreparedStatement instance
+     * @param updating True if loading UPDATE query, false INSERT query.
+     *                 For UPDATE query need fill id param
+     * @throws SQLException If occur sql exception
+     */
+    @Override
+    public void sendToPreparedStatement(PreparedStatement ps, boolean updating) throws SQLException {
+        ps.setString(1, getTitle());
+
+        if (updating) {
+            ps.setInt(2, getId());
+        }
     }
 }

@@ -61,7 +61,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      */
     @Override
     protected ArticleModel createModel(ResultSet rs) throws SQLException {
-        return ArticleModel.createFromResultSet(rs);
+        return new ArticleModel(rs);
     }
 
     /**
@@ -73,13 +73,6 @@ public class ArticleController extends AbstractController<ArticleModel> {
      */
     @Override
     protected void loadToPreparedStatement(PreparedStatement ps, ArticleModel model, boolean updating) throws SQLException {
-        ps.setString(1, model.getTitle());
-        ps.setString(2, model.getContent());
-        ps.setInt(3, model.getAuthorId());
-        ps.setInt(4, model.getLikes());
-
-        if (updating) {
-            ps.setInt(5, model.getId());
-        }
+        model.sendToPreparedStatement(ps, updating);
     }
 }

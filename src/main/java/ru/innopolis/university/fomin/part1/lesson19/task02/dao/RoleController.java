@@ -1,7 +1,6 @@
 package ru.innopolis.university.fomin.part1.lesson19.task02.dao;
 
 import ru.innopolis.university.fomin.part1.lesson19.task01.scheme.BlogDbScheme;
-import ru.innopolis.university.fomin.part1.lesson19.task02.model.ArticleModel;
 import ru.innopolis.university.fomin.part1.lesson19.task02.model.RoleModel;
 
 import java.sql.Connection;
@@ -65,7 +64,7 @@ public class RoleController extends AbstractController<RoleModel> {
      */
     @Override
     protected RoleModel createModel(ResultSet rs) throws SQLException {
-        return RoleModel.createFromResultSet(rs);
+        return new RoleModel(rs);
     }
 
     /**
@@ -77,10 +76,6 @@ public class RoleController extends AbstractController<RoleModel> {
      */
     @Override
     protected void loadToPreparedStatement(PreparedStatement ps, RoleModel model, boolean updating) throws SQLException {
-        ps.setString(1, model.getTitle());
-
-        if (updating) {
-            ps.setInt(2, model.getId());
-        }
+        model.sendToPreparedStatement(ps, updating);
     }
 }

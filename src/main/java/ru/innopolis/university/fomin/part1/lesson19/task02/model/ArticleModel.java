@@ -23,6 +23,10 @@ public class ArticleModel extends AbstractModel {
         this.likes = likes;
     }
 
+    public ArticleModel(ResultSet rs) throws SQLException {
+        loadFromResultSet(rs);
+    }
+
     public int getId() {
         return id;
     }
@@ -75,17 +79,37 @@ public class ArticleModel extends AbstractModel {
     }
 
     /**
+     * Loading model from result set
+     *
      * @param rs ResultSet
-     * @return New model instance
      * @throws SQLException If occur sql exception
      */
-    public static ArticleModel createFromResultSet(ResultSet rs) throws SQLException {
-        ArticleModel model = new ArticleModel();
-        model.setId(rs.getInt(1));
-        model.setTitle(rs.getString(2));
-        model.setContent(rs.getString(3));
-        model.setAuthorId(rs.getInt(4));
-        model.setLikes(rs.getInt(5));
-        return model;
+    @Override
+    public void loadFromResultSet(ResultSet rs) throws SQLException {
+        setId(rs.getInt(1));
+        setTitle(rs.getString(2));
+        setContent(rs.getString(3));
+        setAuthorId(rs.getInt(4));
+        setLikes(rs.getInt(5));
+    }
+
+    /**
+     * Loading model into prepared statement
+     *
+     * @param ps PreparedStatement instance
+     * @param updating True if loading UPDATE query, false INSERT query.
+     *                 For UPDATE query need fill id param
+     * @throws SQLException If occur sql exception
+     */
+    @Override
+    public void sendToPreparedStatement(PreparedStatement ps, boolean updating) throws SQLException {
+        ps.setString(1, getTitle());
+        ps.setString(2, getContent());
+        ps.setInt(3, getAuthorId());
+        ps.setInt(4, getLikes());
+
+        if (updating) {
+            ps.setInt(5, getId());
+        }
     }
 }
