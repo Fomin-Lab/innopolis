@@ -1,6 +1,13 @@
 package ru.innopolis.university.fomin.part1.lesson19.task02.model;
 
-public class RoleModel extends JdbcModel {
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+/**
+ * Model for the roles table
+ */
+public class RoleModel extends AbstractModel {
     private int id;
     private String title;
 
@@ -26,5 +33,17 @@ public class RoleModel extends JdbcModel {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 '}';
+    }
+
+    /**
+     * @param rs ResultSet
+     * @return New model instance
+     * @throws SQLException If occur sql exception
+     */
+    public static RoleModel createFromResultSet(ResultSet rs) throws SQLException {
+        RoleModel model = new RoleModel();
+        model.setId(rs.getInt(1));
+        model.setTitle(rs.getString(2));
+        return model;
     }
 }

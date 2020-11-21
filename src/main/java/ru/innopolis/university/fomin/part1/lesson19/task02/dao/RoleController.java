@@ -2,31 +2,35 @@ package ru.innopolis.university.fomin.part1.lesson19.task02.dao;
 
 import ru.innopolis.university.fomin.part1.lesson19.task01.scheme.BlogDbScheme;
 import ru.innopolis.university.fomin.part1.lesson19.task02.model.ArticleModel;
+import ru.innopolis.university.fomin.part1.lesson19.task02.model.RoleModel;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
- * Article controller for perform CRUD operations
+ * Role controller for perform CRUD operations
  */
-public class ArticleController extends AbstractController<ArticleModel> {
+public class RoleController extends AbstractController<RoleModel> {
     /**
      * SQL for inserting the entry
      */
-    private static final String INSERT_SQL = "INSERT INTO " + BlogDbScheme.ArticleTable.NAME + " "
-            + "(title, content, author_id, likes) VALUES (?, ?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO " + BlogDbScheme.RolesTable.NAME + " "
+            + "(title) VALUES (?)";
 
     /**
      * SQL for updating the entry
      */
-    private static final String UPDATE_SQL = "UPDATE " + BlogDbScheme.ArticleTable.NAME + " "
-            + "SET title = ?, content = ?, author_id = ?, likes = ? "
+    private static final String UPDATE_SQL = "UPDATE " + BlogDbScheme.RolesTable.NAME + " "
+            + "SET title = ? "
             + "WHERE id = ?";
 
     /**
      * Constructor
      * @param connection Jdbc connection
      */
-    public ArticleController(Connection connection) {
+    public RoleController(Connection connection) {
         super(connection);
     }
 
@@ -51,7 +55,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      */
     @Override
     protected String tableName() {
-        return BlogDbScheme.ArticleTable.NAME;
+        return BlogDbScheme.RolesTable.NAME;
     }
 
     /**
@@ -60,8 +64,8 @@ public class ArticleController extends AbstractController<ArticleModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected ArticleModel createModel(ResultSet rs) throws SQLException {
-        return ArticleModel.createFromResultSet(rs);
+    protected RoleModel createModel(ResultSet rs) throws SQLException {
+        return RoleModel.createFromResultSet(rs);
     }
 
     /**
@@ -72,14 +76,11 @@ public class ArticleController extends AbstractController<ArticleModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected void loadToPreparedStatement(PreparedStatement ps, ArticleModel model, boolean updating) throws SQLException {
+    protected void loadToPreparedStatement(PreparedStatement ps, RoleModel model, boolean updating) throws SQLException {
         ps.setString(1, model.getTitle());
-        ps.setString(2, model.getContent());
-        ps.setInt(3, model.getAuthorId());
-        ps.setInt(4, model.getLikes());
 
         if (updating) {
-            ps.setInt(5, model.getId());
+            ps.setInt(2, model.getId());
         }
     }
 }

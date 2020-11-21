@@ -82,8 +82,8 @@ public class DatabaseUtil {
                     + "id bigserial primary key,\n"
                     + "title varchar (100) NOT NULL,\n"
                     + "content text,\n"
-                    + "author varchar (50),\n"
-                    + "likes int)"
+                    + "author_id varchar (50),\n"
+                    + "likes int DEFAULT 0)"
             );
 
             // Таблица пользователей
@@ -92,7 +92,8 @@ public class DatabaseUtil {
                     + "id bigserial primary key,\n"
                     + "login varchar (100) NOT NULL,\n"
                     + "name varchar (100),\n"
-                    + "rate int)"
+                    + "role_id int DEFAULT 1,\n"
+                    + "rate int DEFAULT 0)"
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,20 +108,41 @@ public class DatabaseUtil {
              Statement statement = connection.createStatement();
         ) {
             // Таблица ролей
-
-            // Таблица статей
-            statement.execute("insert into bg_articles (title, content, author)\n" +
-                    "        values ('Статья 1', 'Текст статьи', 'Иванов')");
-            statement.execute("insert into bg_articles (title, content, author)\n" +
-                    "        values ('Статья 2', 'Текст статьи 2', 'Веточкин')");
-            statement.execute("insert into bg_articles (title, content, author)\n" +
-                    "        values ('Статья 3', 'Текст статьи 3', 'Камушкин')");
-            statement.execute("insert into bg_articles (title, content, author)\n" +
-                    "        values ('Статья 4', 'Текст статьи 4', 'Заборчик')");
-            statement.execute("insert into bg_articles (title, content, author)\n" +
-                    "        values ('Статья 5', 'Текст статьи 5', 'Заплесневейко')");
+            statement.execute("insert into bg_roles (title)\n" +
+                    "values ('Гость')");
+            statement.execute("insert into bg_roles (title)\n" +
+                    "values ('Модератор')");
+            statement.execute("insert into bg_roles (title)\n" +
+                    "values ('Автор')");
+            statement.execute("insert into bg_roles (title)\n" +
+                    "values ('Администратор')");
 
             // Таблица пользователей
+            statement.execute("insert into bg_users (login, name, role_id)\n" +
+                    "values ('ivanov', 'Иванов', '3')");
+            statement.execute("insert into bg_users (login, name, role_id)\n" +
+                    "values ('vetochkin', 'Веточкин', '3')");
+            statement.execute("insert into bg_users (login, name, role_id)\n" +
+                    "values ('kamushkin', 'Камушкин', '3')");
+            statement.execute("insert into bg_users (login, name, role_id)\n" +
+                    "values ('zaborchik', 'Заборчик', '3')");
+            statement.execute("insert into bg_users (login, name, role_id)\n" +
+                    "values ('zaplesneveiko', 'Заплесневейко', '3')");
+            statement.execute("insert into bg_users (login, name, role_id)\n" +
+                    "values ('root', 'Владелец', '4')");
+
+            // Таблица статей
+            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+                    "values ('Статья 1', 'Текст статьи', '1')");
+            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+                    "values ('Статья 2', 'Текст статьи 2', '2')");
+            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+                    "values ('Статья 3', 'Текст статьи 3', '3')");
+            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+                    "values ('Статья 4', 'Текст статьи 4', '4')");
+            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+                    "values ('Статья 5', 'Текст статьи 5', '5')");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
