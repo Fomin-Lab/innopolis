@@ -16,8 +16,12 @@ public class UserModel extends AbstractModel {
     private int roleId;
     private int rate;
 
-    public UserModel() { }
-
+    /**
+     * @param name User name
+     * @param login User login
+     * @param roleId User role_id
+     * @param rate User rate
+     */
     public UserModel(String name, String login, int roleId, int rate) {
         this.name = name;
         this.login = login;
@@ -25,10 +29,17 @@ public class UserModel extends AbstractModel {
         this.rate = rate;
     }
 
+    /**
+     * Constructor for loading model from ResultSet
+     *
+     * @param rs ResultSet instance
+     * @throws SQLException If occur sql exception
+     */
     public UserModel(ResultSet rs) throws SQLException {
         loadFromResultSet(rs);
     }
 
+    // getters and setters
     public int getId() {
         return id;
     }

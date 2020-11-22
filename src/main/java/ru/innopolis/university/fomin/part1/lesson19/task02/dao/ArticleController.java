@@ -24,6 +24,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
 
     /**
      * Constructor
+     *
      * @param connection Jdbc connection
      */
     public ArticleController(Connection connection) {
@@ -31,6 +32,8 @@ public class ArticleController extends AbstractController<ArticleModel> {
     }
 
     /**
+     * SQL string
+     *
      * @return SQL for inserting the entry
      */
     @Override
@@ -39,6 +42,8 @@ public class ArticleController extends AbstractController<ArticleModel> {
     }
 
     /**
+     * SQL string
+     *
      * @return SQL for updating the entry
      */
     @Override
@@ -55,6 +60,8 @@ public class ArticleController extends AbstractController<ArticleModel> {
     }
 
     /**
+     * Create model from ResultSet
+     *
      * @param rs ResultSet instance
      * @return Model
      * @throws SQLException If occur sql exception
@@ -65,6 +72,8 @@ public class ArticleController extends AbstractController<ArticleModel> {
     }
 
     /**
+     * Loading PreparedStatement from model
+     *
      * @param ps       PreparedStatement instance
      * @param model    Model for load
      * @param updating True if loading UPDATE query, false INSERT query.
@@ -72,7 +81,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected void loadToPreparedStatement(PreparedStatement ps, ArticleModel model, boolean updating) throws SQLException {
+    protected void loadPreparedStatement(PreparedStatement ps, ArticleModel model, boolean updating) throws SQLException {
         model.sendToPreparedStatement(ps, updating);
     }
 }

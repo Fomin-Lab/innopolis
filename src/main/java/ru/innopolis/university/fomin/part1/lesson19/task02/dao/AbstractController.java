@@ -53,7 +53,7 @@ public abstract class AbstractController<T extends AbstractModel> {
     protected abstract String getInsertQuery();
 
     /**
-     * @return SQL for inserting the entry
+     * @return SQL for updating the entry
      */
     protected abstract String getUpdateQuery();
 
@@ -63,6 +63,8 @@ public abstract class AbstractController<T extends AbstractModel> {
     protected abstract String tableName();
 
     /**
+     * Create model from ResultSet
+     *
      * @param rs ResultSet instance
      * @return Instance of model
      * @throws SQLException If occur sql exception
@@ -79,10 +81,11 @@ public abstract class AbstractController<T extends AbstractModel> {
      *          For UPDATE query need fill id param
      * @throws SQLException If occur sql exception
      */
-    protected abstract void loadToPreparedStatement(PreparedStatement ps, T model, boolean updating) throws SQLException;
+    protected abstract void loadPreparedStatement(PreparedStatement ps, T model, boolean updating) throws SQLException;
 
     /**
      * Select all entries
+     *
      * @return List of entries from table
      */
     public List<T> getAll() {
@@ -102,6 +105,7 @@ public abstract class AbstractController<T extends AbstractModel> {
 
     /**
      * Select entry by id
+     *
      * @param id Identifier the entry in table
      * @return Instance of model
      */
@@ -120,6 +124,8 @@ public abstract class AbstractController<T extends AbstractModel> {
     }
 
     /**
+     * Delete entity by id
+     *
      * @param id Identifier the entry in table
      * @return True if was deleted
      */
@@ -134,12 +140,14 @@ public abstract class AbstractController<T extends AbstractModel> {
     }
 
     /**
+     * Create entity from model
+     *
      * @param model Create new entry in table by model
      * @return Identifier of created entry
      */
     public int create(T model) {
         try (PreparedStatement ps = connection.prepareStatement(getInsertQuery(), Statement.RETURN_GENERATED_KEYS)) {
-            loadToPreparedStatement(ps, model, false);
+            loadPreparedStatement(ps, model, false);
             ps.executeUpdate();
 
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
@@ -156,12 +164,14 @@ public abstract class AbstractController<T extends AbstractModel> {
 
 
     /**
+     * Update entry by model
+     *
      * @param model Update entry in table by model
      * @return True if success updated
      */
     public boolean update(T model) {
         try (PreparedStatement ps = connection.prepareStatement(getUpdateQuery())) {
-            loadToPreparedStatement(ps, model, true);
+            loadPreparedStatement(ps, model, true);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -11,16 +11,26 @@ public class RoleModel extends AbstractModel {
     private int id;
     private String title;
 
-    public RoleModel() { }
-
+    /**
+     * Constructor
+     *
+     * @param title Title of role
+     */
     public RoleModel(String title) {
         this.title = title;
     }
 
+    /**
+     * Constructor for loading model from ResultSet
+     *
+     * @param rs ResultSet instance
+     * @throws SQLException If occur sql exception
+     */
     public RoleModel(ResultSet rs) throws SQLException {
         loadFromResultSet(rs);
     }
 
+    // getters and setters
     public int getId() {
         return id;
     }

@@ -41,11 +41,11 @@ public class Main {
         System.out.println("Присвоенный айди: " + articleController.create(articleModel));
 
         System.out.println("\nСоздаём нового пользователя");
-        UserModel userModel = new UserModel("Кудрящкин", "kudryashkin", 2, 4);
+        UserModel userModel = new UserModel("Пчелкина", "pchelkina", 3, 2);
         System.out.println("Присвоенный айди: " + userController.create(userModel));
 
         System.out.println("\nОбновляем пользователя");
-        UserModel userModel2 = new UserModel("Кудрящкин", "kudryashkin", 2, 4);
+        UserModel userModel2 = new UserModel("Кудряшкина", "kudryashkina", 2, 4);
         userModel2.setId(1);
         System.out.println("Успешно: " + userController.update(userModel2));
     }
