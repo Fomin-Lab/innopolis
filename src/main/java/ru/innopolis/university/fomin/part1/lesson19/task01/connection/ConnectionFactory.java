@@ -11,6 +11,8 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
     /**
+     * Get connection by type
+     *
      * @param type Type of database for create connection
      * @return Connection instance
      * @throws SQLException If occur sql exception

@@ -17,7 +17,7 @@ public abstract class AbstractModel {
     public abstract void loadFromResultSet(ResultSet rs) throws SQLException;
 
     /**
-     * Loading model into prepared statement
+     * Loading prepared statement by model
      *
      * @param ps PreparedStatement instance
      * @param updating True if loading UPDATE query, false INSERT query.

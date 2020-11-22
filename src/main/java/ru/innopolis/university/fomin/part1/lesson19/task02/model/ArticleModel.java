@@ -14,8 +14,14 @@ public class ArticleModel extends AbstractModel {
     private int authorId;
     private int likes;
 
-    public ArticleModel() { }
-
+    /**
+     * Constructor
+     *
+     * @param title Article title
+     * @param content Article content
+     * @param authorId Article author_id
+     * @param likes Number of likes put to the article
+     */
     public ArticleModel(String title, String content, int authorId, int likes) {
         this.title = title;
         this.content = content;
@@ -23,10 +29,17 @@ public class ArticleModel extends AbstractModel {
         this.likes = likes;
     }
 
+    /**
+     * Constructor for loading model from ResultSet
+     *
+     * @param rs ResultSet instance
+     * @throws SQLException If occur sql exception
+     */
     public ArticleModel(ResultSet rs) throws SQLException {
         loadFromResultSet(rs);
     }
 
+    // getters and setters
     public int getId() {
         return id;
     }

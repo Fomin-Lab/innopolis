@@ -27,6 +27,7 @@ public class RoleController extends AbstractController<RoleModel> {
 
     /**
      * Constructor
+     *
      * @param connection Jdbc connection
      */
     public RoleController(Connection connection) {
@@ -34,18 +35,22 @@ public class RoleController extends AbstractController<RoleModel> {
     }
 
     /**
+     * SQL string
+     *
      * @return SQL for inserting the entry
      */
     @Override
-    protected String getInsertQuery() {
+    public String getInsertQuery() {
         return INSERT_SQL;
     }
 
     /**
+     * SQL string
+     *
      * @return SQL for updating the entry
      */
     @Override
-    protected String getUpdateQuery() {
+    public String getUpdateQuery() {
         return UPDATE_SQL;
     }
 
@@ -58,6 +63,8 @@ public class RoleController extends AbstractController<RoleModel> {
     }
 
     /**
+     * Create model from ResultSet
+     *
      * @param rs ResultSet instance
      * @return Model
      * @throws SQLException If occur sql exception
@@ -68,6 +75,8 @@ public class RoleController extends AbstractController<RoleModel> {
     }
 
     /**
+     * Loading PreparedStatement from model
+     *
      * @param ps       PreparedStatement instance
      * @param model    Model for load
      * @param updating True if loading UPDATE query, false INSERT query.
@@ -75,7 +84,7 @@ public class RoleController extends AbstractController<RoleModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected void loadToPreparedStatement(PreparedStatement ps, RoleModel model, boolean updating) throws SQLException {
+    protected void loadPreparedStatement(PreparedStatement ps, RoleModel model, boolean updating) throws SQLException {
         model.sendToPreparedStatement(ps, updating);
     }
 }
