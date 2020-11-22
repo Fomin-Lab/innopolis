@@ -110,40 +110,42 @@ public class DatabaseUtil {
              Statement statement = connection.createStatement();
         ) {
             // Таблица ролей
-            statement.execute("insert into bg_roles (title)\n" +
+            statement.addBatch("insert into bg_roles (title)\n" +
                     "values ('Гость')");
-            statement.execute("insert into bg_roles (title)\n" +
+            statement.addBatch("insert into bg_roles (title)\n" +
                     "values ('Модератор')");
-            statement.execute("insert into bg_roles (title)\n" +
+            statement.addBatch("insert into bg_roles (title)\n" +
                     "values ('Автор')");
-            statement.execute("insert into bg_roles (title)\n" +
+            statement.addBatch("insert into bg_roles (title)\n" +
                     "values ('Администратор')");
 
             // Таблица пользователей
-            statement.execute("insert into bg_users (login, name, role_id)\n" +
+            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
                     "values ('ivanov', 'Иванов', '3')");
-            statement.execute("insert into bg_users (login, name, role_id)\n" +
-                    "values ('vetochkin', 'Веточкин', '3')");
-            statement.execute("insert into bg_users (login, name, role_id)\n" +
+            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
+                    "values ('vetochkin', 'Веточкин', '1')");
+            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
                     "values ('kamushkin', 'Камушкин', '3')");
-            statement.execute("insert into bg_users (login, name, role_id)\n" +
+            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
                     "values ('zaborchik', 'Заборчик', '3')");
-            statement.execute("insert into bg_users (login, name, role_id)\n" +
+            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
                     "values ('zaplesneveiko', 'Заплесневейко', '3')");
-            statement.execute("insert into bg_users (login, name, role_id)\n" +
+            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
                     "values ('root', 'Владелец', '4')");
 
             // Таблица статей
-            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+            statement.addBatch("insert into bg_articles (title, content, author_id)\n" +
                     "values ('Статья 1', 'Текст статьи', '1')");
-            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+            statement.addBatch("insert into bg_articles (title, content, author_id)\n" +
                     "values ('Статья 2', 'Текст статьи 2', '2')");
-            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+            statement.addBatch("insert into bg_articles (title, content, author_id)\n" +
                     "values ('Статья 3', 'Текст статьи 3', '3')");
-            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+            statement.addBatch("insert into bg_articles (title, content, author_id)\n" +
                     "values ('Статья 4', 'Текст статьи 4', '4')");
-            statement.execute("insert into bg_articles (title, content, author_id)\n" +
+            statement.addBatch("insert into bg_articles (title, content, author_id)\n" +
                     "values ('Статья 5', 'Текст статьи 5', '5')");
+
+            statement.executeBatch();
 
         } catch (SQLException e) {
             e.printStackTrace();
