@@ -4,6 +4,7 @@ import ru.innopolis.university.fomin.part1.lesson19.task02.dao.ArticleController
 import ru.innopolis.university.fomin.part1.lesson19.task02.dao.RoleController;
 import ru.innopolis.university.fomin.part1.lesson19.task02.dao.UserController;
 import ru.innopolis.university.fomin.part1.lesson19.task02.jdbc_connection.PostgreConnectionManager;
+import ru.innopolis.university.fomin.part1.lesson19.task02.model.RoleModel;
 import ru.innopolis.university.fomin.part1.lesson19.task02.model.UserModel;
 
 import java.sql.*;
@@ -21,24 +22,39 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         Connection connection = new PostgreConnectionManager().getConnection();
 
-        demoSelect(connection);
         demoSavepoint(connection);
 
         if (connection.getMetaData().supportsBatchUpdates()) {
             demoBatch(connection);
         }
+
+        demoCRUD(connection);
     }
 
     /**
-     * Demo select all rows
+     * Demo CRUD operations
      *
      * @param connection Jdbc connection
      */
-    public static void demoSelect(Connection connection) {
+    public static void demoCRUD(Connection connection) {
         ArticleController articleController = new ArticleController(connection);
         RoleController roleController = new RoleController(connection);
         UserController userController = new UserController(connection);
 
+        // create
+        roleController.create(new RoleModel("Редактор"));
+
+        // read
+        RoleModel roleModel = roleController.getEntityById(4);
+
+        // update
+        roleModel.setTitle("Root");
+        roleController.update(roleModel);
+
+        // delete
+        userController.delete(1);
+
+        // read all
         System.out.println("Статьи: ");
         articleController.getAll().forEach(System.out::println);
 
