@@ -34,7 +34,7 @@ public abstract class AbstractController<T extends AbstractModel> {
     /**
      * @return SQL for searching the entry by id
      */
-    protected String getSelectByIdQuery() {
+    public String getSelectByIdQuery() {
         return "SELECT * FROM " + tableName() + " "
                 + "WHERE id = ?";
     }
@@ -42,7 +42,7 @@ public abstract class AbstractController<T extends AbstractModel> {
     /**
      * @return SQL for deleting the entry by id
      */
-    protected String getDeleteByIdQuery() {
+    public String getDeleteByIdQuery() {
         return "DELETE FROM " + tableName() + " "
                 + "WHERE id = ?";
     }

@@ -3,50 +3,120 @@ package ru.innopolis.university.fomin.part1.lesson19.task02;
 import ru.innopolis.university.fomin.part1.lesson19.task02.dao.ArticleController;
 import ru.innopolis.university.fomin.part1.lesson19.task02.dao.RoleController;
 import ru.innopolis.university.fomin.part1.lesson19.task02.dao.UserController;
-import ru.innopolis.university.fomin.part1.lesson19.task02.jdbc_connection.ConnectionManager;
 import ru.innopolis.university.fomin.part1.lesson19.task02.jdbc_connection.PostgreConnectionManager;
-import ru.innopolis.university.fomin.part1.lesson19.task02.model.ArticleModel;
 import ru.innopolis.university.fomin.part1.lesson19.task02.model.UserModel;
 
+import java.sql.*;
+
+/**
+ * Class performs the task conditions lesson19 task2
+ */
 public class Main {
-    public static void main(String[] args) {
-        ConnectionManager connectionManager = new PostgreConnectionManager();
+    public static void main(String[] args) throws SQLException {
+        Connection connection = new PostgreConnectionManager().getConnection();
+
+        demoSelect(connection);
+        demoSavepoint(connection);
+
+        if (connection.getMetaData().supportsBatchUpdates()) {
+            demoBatch(connection);
+        }
+    }
+
+    /**
+     * Demo select all rows
+     *
+     * @param connection Jdbc connection
+     */
+    public static void demoSelect(Connection connection) {
+        ArticleController articleController = new ArticleController(connection);
+        RoleController roleController = new RoleController(connection);
+        UserController userController = new UserController(connection);
 
         System.out.println("Статьи: ");
-        ArticleController articleController = new ArticleController(
-                connectionManager.getConnection()
-        );
         articleController.getAll().forEach(System.out::println);
 
         System.out.println("\nРоли: ");
-        RoleController roleController = new RoleController(
-                connectionManager.getConnection()
-        );
         roleController.getAll().forEach(System.out::println);
 
         System.out.println("\nПользователи: ");
-        UserController userController = new UserController(
-                connectionManager.getConnection()
-        );
         userController.getAll().forEach(System.out::println);
+    }
 
-        System.out.println("\nПолучаем роль по идентификатору");
-        System.out.println(roleController.getEntityById(2));
+    /**
+     * Demo savepoint and rollback
+     *
+     * @param connection Jdbc connection
+     * @throws SQLException If occur sql connection
+     */
+    public static void demoSavepoint(Connection connection) throws SQLException {
+        connection.setAutoCommit(false);
 
-        System.out.println("\nУдаляем запись по айди");
-        System.out.println("Успешно: " + userController.delete(3));
+        UserModel user1 = new UserModel("Dima", "dima", 1, 1);
+        UserModel user2 = new UserModel("Katya", "katya", 2, 2);
+        UserModel user3 = new UserModel("Annya", "anna", 3, 3);
 
-        System.out.println("\nСоздаём новую статью");
-        ArticleModel articleModel = new ArticleModel("Cnfsd", "asdsad", 2, 2);
-        System.out.println("Присвоенный айди: " + articleController.create(articleModel));
+        UserController userController = new UserController(connection);
 
-        System.out.println("\nСоздаём нового пользователя");
-        UserModel userModel = new UserModel("Пчелкина", "pchelkina", 3, 2);
-        System.out.println("Присвоенный айди: " + userController.create(userModel));
+        userController.create(user1);
+        userController.create(user2);
 
-        System.out.println("\nОбновляем пользователя");
-        UserModel userModel2 = new UserModel("Кудряшкина", "kudryashkina", 2, 4);
-        userModel2.setId(1);
-        System.out.println("Успешно: " + userController.update(userModel2));
+        // savepoint
+        Savepoint savepoint = connection.setSavepoint();
+
+        userController.create(user3);
+
+        // user3 not created
+        connection.rollback(savepoint);
+
+        connection.commit();
+    }
+
+    /**
+     * Demo execute batch
+     *
+     * @param connection Jdbc connection
+     * @throws SQLException If occur sql connection
+     */
+    public static void demoBatch(Connection connection) throws SQLException {
+        connection.setAutoCommit(false);
+
+        UserController controller = new UserController(connection);
+        UserModel user1 = new UserModel("Dima1", "dima1", 1, 11);
+        UserModel user2 = new UserModel("Katya1", "katya1", 2, 22);
+        UserModel user3 = new UserModel("Annya1", "anna1", 3, 33);
+
+        // insert
+        try (PreparedStatement statement = connection.prepareStatement(controller.getInsertQuery())) {
+            user1.sendToPreparedStatement(statement, false);
+            statement.addBatch();
+
+            user2.sendToPreparedStatement(statement, false);
+            statement.addBatch();
+
+            user3.sendToPreparedStatement(statement, false);
+            statement.addBatch();
+
+            statement.executeBatch();
+            connection.commit();
+        }
+
+        // update
+        try (PreparedStatement statement = connection.prepareStatement(controller.getUpdateQuery())) {
+            user1.setId(1);
+            user1.sendToPreparedStatement(statement, true);
+            statement.addBatch();
+
+            user2.setId(2);
+            user2.sendToPreparedStatement(statement, true);
+            statement.addBatch();
+
+            user3.setId(4);
+            user3.sendToPreparedStatement(statement, true);
+            statement.addBatch();
+
+            statement.executeBatch();
+            connection.commit();
+        }
     }
 }

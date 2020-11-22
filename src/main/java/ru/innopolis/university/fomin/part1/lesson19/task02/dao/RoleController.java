@@ -40,7 +40,7 @@ public class RoleController extends AbstractController<RoleModel> {
      * @return SQL for inserting the entry
      */
     @Override
-    protected String getInsertQuery() {
+    public String getInsertQuery() {
         return INSERT_SQL;
     }
 
@@ -50,7 +50,7 @@ public class RoleController extends AbstractController<RoleModel> {
      * @return SQL for updating the entry
      */
     @Override
-    protected String getUpdateQuery() {
+    public String getUpdateQuery() {
         return UPDATE_SQL;
     }
 

@@ -37,7 +37,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      * @return SQL for inserting the entry
      */
     @Override
-    protected String getInsertQuery() {
+    public String getInsertQuery() {
         return INSERT_SQL;
     }
 
@@ -47,7 +47,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      * @return SQL for updating the entry
      */
     @Override
-    protected String getUpdateQuery() {
+    public String getUpdateQuery() {
         return UPDATE_SQL;
     }
 
