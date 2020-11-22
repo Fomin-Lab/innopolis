@@ -38,6 +38,8 @@ public class DatabaseUtil {
 
     /**
      * Entry point
+     * Create/Recreate database and tables
+     *
      * @param args Input arguments
      */
     public static void main(String[] args) {

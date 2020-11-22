@@ -12,6 +12,12 @@ import java.sql.*;
  * Class performs the task conditions lesson19 task2
  */
 public class Main {
+    /**
+     * Entry point execute demo examples
+     *
+     * @param args Input args
+     * @throws SQLException If occur sql exception
+     */
     public static void main(String[] args) throws SQLException {
         Connection connection = new PostgreConnectionManager().getConnection();
 
@@ -86,7 +92,7 @@ public class Main {
         UserModel user2 = new UserModel("Katya1", "katya1", 2, 22);
         UserModel user3 = new UserModel("Annya1", "anna1", 3, 33);
 
-        // insert
+        // insert with batch
         try (PreparedStatement statement = connection.prepareStatement(controller.getInsertQuery())) {
             user1.sendToPreparedStatement(statement, false);
             statement.addBatch();
@@ -101,7 +107,7 @@ public class Main {
             connection.commit();
         }
 
-        // update
+        // update with batch
         try (PreparedStatement statement = connection.prepareStatement(controller.getUpdateQuery())) {
             user1.setId(1);
             user1.sendToPreparedStatement(statement, true);
