@@ -29,13 +29,16 @@
     <Loggers>
         <!-- Корневой логгер -->
         <Root level="trace">
-            <AppenderRef ref="file" level="DEBUG"/>
-            <AppenderRef ref="console" level="TRACE"/>
-        </Root>
-        <!-- Логгер для пакета -->
-        <Logger name="ru.innopolis.university.fomin.part1" level="trace" additivity="false">
             <AppenderRef ref="file" level="TRACE"/>
             <AppenderRef ref="console" level="DEBUG"/>
+        </Root>
+        <!-- Мои логгеры -->
+        <Logger name="ru.innopolis.university.fomin.part1.lesson22.DatabaseUtil" level="info" additivity="false">
+            <AppenderRef ref="file" level="TRACE"/>
+            <AppenderRef ref="console" level="DEBUG"/>
+        </Logger>
+
+        <Logger name="ru.innopolis.university.fomin.part1" level="trace" additivity="true">
             <AppenderRef ref="db" level="INFO"/>
         </Logger>
     </Loggers>

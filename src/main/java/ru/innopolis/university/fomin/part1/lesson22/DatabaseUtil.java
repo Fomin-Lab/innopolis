@@ -1,8 +1,10 @@
-package ru.innopolis.university.fomin.part1.lesson22.task01;
+package ru.innopolis.university.fomin.part1.lesson22;
 
-import ru.innopolis.university.fomin.part1.lesson22.task01.connection.ConnectionFactory;
-import ru.innopolis.university.fomin.part1.lesson22.task01.connection.DatabaseType;
-import ru.innopolis.university.fomin.part1.lesson22.task01.scheme.BlogDbScheme;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.innopolis.university.fomin.part1.lesson22.connection.ConnectionFactory;
+import ru.innopolis.university.fomin.part1.lesson22.connection.DatabaseType;
+import ru.innopolis.university.fomin.part1.lesson22.scheme.BlogDbScheme;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,6 +14,11 @@ import java.sql.Statement;
  * Util for create empty tables in postgre database
  */
 public class DatabaseUtil {
+    /**
+     * Slf4j wrapper
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseUtil.class);
+
     /**
      * Username for create connection with the database
      */
@@ -52,15 +59,18 @@ public class DatabaseUtil {
      * Create/Recreate blog database
      */
     public static void renewDatabase() {
+        LOGGER.trace("start renewDatabase");
+
         try (Connection connection = ConnectionFactory.getConnection(DatabaseType.DEFAULT);
              Statement statement = connection.createStatement();
         ) {
             // База данных
+            LOGGER.info("DROP/CREATE database " + DB_NAME);
             statement.execute("DROP DATABASE IF EXISTS " + DB_NAME + ";\n"
                     + "CREATE DATABASE " + DB_NAME + ";\n"
             );
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("sql exception", e);
         }
     }
 
@@ -68,10 +78,13 @@ public class DatabaseUtil {
      * Create/Recreate blog tables
      */
     public static void renewTables() {
+        LOGGER.trace("start renewTables");
+
         try (Connection connection = ConnectionFactory.getConnection(DatabaseType.BLOG);
              Statement statement = connection.createStatement();
         ) {
             // Таблица ролей
+            LOGGER.info("DROP/CREATE table bg_roles");
             statement.execute("DROP TABLE IF EXISTS bg_roles;\n"
                     + "CREATE TABLE bg_roles (\n"
                     + "id bigserial primary key,\n"
@@ -79,6 +92,7 @@ public class DatabaseUtil {
             );
 
             // Таблица статей
+            LOGGER.info("DROP/CREATE table bg_articles");
             statement.execute("DROP TABLE IF EXISTS bg_articles;\n"
                     + "CREATE TABLE bg_articles (\n"
                     + "id bigserial primary key,\n"
@@ -89,6 +103,7 @@ public class DatabaseUtil {
             );
 
             // Таблица пользователей
+            LOGGER.info("DROP/CREATE table bg_users");
             statement.execute("DROP TABLE IF EXISTS bg_users;\n"
                     + "CREATE TABLE bg_users (\n"
                     + "id bigserial primary key,\n"
@@ -97,8 +112,21 @@ public class DatabaseUtil {
                     + "role_id int DEFAULT 1,\n"
                     + "rate int DEFAULT 0)"
             );
+
+            // Таблица логов
+            LOGGER.info("DROP/CREATE table bg_users");
+            statement.execute("DROP TABLE IF EXISTS APP_LOGS;\n"
+                    + "CREATE TABLE APP_LOGS (\n"
+                    + "LOG_ID varchar(100) primary key,\n"
+                    + "ENTRY_DATE timestamp,\n"
+                    + "LOGGER varchar(100),\n"
+                    + "LOG_LEVEL varchar(100),\n"
+                    + "MESSAGE TEXT,\n"
+                    + "EXCEPTION TEXT)"
+            );
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("sql exception", e);
         }
     }
 
@@ -106,6 +134,8 @@ public class DatabaseUtil {
      * Insert some lines into the tables
      */
     public static void insertSomeLines() {
+        LOGGER.trace("start insertSomeLines");
+
         try (Connection connection = ConnectionFactory.getConnection(DatabaseType.BLOG);
              Statement statement = connection.createStatement();
         ) {
@@ -148,7 +178,7 @@ public class DatabaseUtil {
             statement.executeBatch();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("sql exception", e);
         }
     }
 

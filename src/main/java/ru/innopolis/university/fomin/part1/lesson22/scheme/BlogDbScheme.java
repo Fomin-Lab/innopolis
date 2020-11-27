@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson22.task01.scheme;
+package ru.innopolis.university.fomin.part1.lesson22.scheme;
 
 /**
  * Scheme of the blog database

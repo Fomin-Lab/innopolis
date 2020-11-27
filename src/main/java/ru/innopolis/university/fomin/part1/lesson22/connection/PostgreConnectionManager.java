@@ -1,9 +1,7 @@
-package ru.innopolis.university.fomin.part1.lesson22.task02.jdbc_connection;
+package ru.innopolis.university.fomin.part1.lesson22.connection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.innopolis.university.fomin.part1.lesson22.task01.connection.ConnectionFactory;
-import ru.innopolis.university.fomin.part1.lesson22.task01.connection.DatabaseType;
 
 import java.sql.Connection;
 import java.sql.SQLException;

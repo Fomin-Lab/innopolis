@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson22.task02.model;
+package ru.innopolis.university.fomin.part1.lesson22.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

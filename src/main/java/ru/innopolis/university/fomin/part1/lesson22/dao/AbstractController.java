@@ -1,8 +1,8 @@
-package ru.innopolis.university.fomin.part1.lesson22.task02.dao;
+package ru.innopolis.university.fomin.part1.lesson22.dao;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.innopolis.university.fomin.part1.lesson22.task02.model.AbstractModel;
+import ru.innopolis.university.fomin.part1.lesson22.model.AbstractModel;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @param connection Instance of jdbc connection
      */
     public AbstractController(Connection connection) {
-        LOGGER.trace("start controller constructor");
+        LOGGER.trace("start controller constructor [" + tableName() + "]");
         this.connection = connection;
     }
 

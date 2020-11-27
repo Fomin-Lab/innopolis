@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson22.task01.connection;
+package ru.innopolis.university.fomin.part1.lesson22.connection;
 
 /**
  * List of types of the database
