@@ -1,7 +1,7 @@
-package ru.innopolis.university.fomin.part1.lesson22.dao;
+package ru.innopolis.university.fomin.part1.lesson23.dao;
 
-import ru.innopolis.university.fomin.part1.lesson22.scheme.BlogDbScheme;
-import ru.innopolis.university.fomin.part1.lesson22.model.UserModel;
+import ru.innopolis.university.fomin.part1.lesson23.scheme.BlogDbScheme;
+import ru.innopolis.university.fomin.part1.lesson23.model.RoleModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,20 +9,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * User controller for perform CRUD operations
+ * Role controller for perform CRUD operations
  */
-public class UserController extends AbstractController<UserModel> {
+public class RoleController extends AbstractController<RoleModel> {
     /**
      * SQL for inserting the entry
      */
-    private static final String INSERT_SQL = "INSERT INTO " + BlogDbScheme.UsersTable.NAME + " "
-            + "(login, name, role_id, rate) VALUES (?, ?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO " + BlogDbScheme.RolesTable.NAME + " "
+            + "(title) VALUES (?)";
 
     /**
      * SQL for updating the entry
      */
-    private static final String UPDATE_SQL = "UPDATE " + BlogDbScheme.UsersTable.NAME + " "
-            + "SET login = ?, name = ?, role_id = ?, rate = ? "
+    private static final String UPDATE_SQL = "UPDATE " + BlogDbScheme.RolesTable.NAME + " "
+            + "SET title = ? "
             + "WHERE id = ?";
 
     /**
@@ -30,7 +30,7 @@ public class UserController extends AbstractController<UserModel> {
      *
      * @param connection Jdbc connection
      */
-    public UserController(Connection connection) {
+    public RoleController(Connection connection) {
         super(connection);
     }
 
@@ -59,7 +59,7 @@ public class UserController extends AbstractController<UserModel> {
      */
     @Override
     protected String tableName() {
-        return BlogDbScheme.UsersTable.NAME;
+        return BlogDbScheme.RolesTable.NAME;
     }
 
     /**
@@ -70,8 +70,8 @@ public class UserController extends AbstractController<UserModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected UserModel createModel(ResultSet rs) throws SQLException {
-        return new UserModel(rs);
+    protected RoleModel createModel(ResultSet rs) throws SQLException {
+        return new RoleModel(rs);
     }
 
     /**
@@ -84,7 +84,7 @@ public class UserController extends AbstractController<UserModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected void loadPreparedStatement(PreparedStatement ps, UserModel model, boolean updating) throws SQLException {
+    protected void loadPreparedStatement(PreparedStatement ps, RoleModel model, boolean updating) throws SQLException {
         model.sendToPreparedStatement(ps, updating);
     }
 }

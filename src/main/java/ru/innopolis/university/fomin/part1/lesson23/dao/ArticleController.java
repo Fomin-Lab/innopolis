@@ -1,7 +1,7 @@
-package ru.innopolis.university.fomin.part1.lesson22.dao;
+package ru.innopolis.university.fomin.part1.lesson23.dao;
 
-import ru.innopolis.university.fomin.part1.lesson22.scheme.BlogDbScheme;
-import ru.innopolis.university.fomin.part1.lesson22.model.ArticleModel;
+import ru.innopolis.university.fomin.part1.lesson23.scheme.BlogDbScheme;
+import ru.innopolis.university.fomin.part1.lesson23.model.ArticleModel;
 
 import java.sql.*;
 

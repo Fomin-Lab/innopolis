@@ -1,10 +1,10 @@
-package ru.innopolis.university.fomin.part1.lesson22;
+package ru.innopolis.university.fomin.part1.lesson23;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.innopolis.university.fomin.part1.lesson22.connection.ConnectionFactory;
-import ru.innopolis.university.fomin.part1.lesson22.connection.DatabaseType;
-import ru.innopolis.university.fomin.part1.lesson22.scheme.BlogDbScheme;
+import ru.innopolis.university.fomin.part1.lesson23.connection.ConnectionFactory;
+import ru.innopolis.university.fomin.part1.lesson23.connection.DatabaseType;
+import ru.innopolis.university.fomin.part1.lesson23.scheme.BlogDbScheme;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,13 +1,13 @@
-package ru.innopolis.university.fomin.part1.lesson22;
+package ru.innopolis.university.fomin.part1.lesson23;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.innopolis.university.fomin.part1.lesson22.dao.ArticleController;
-import ru.innopolis.university.fomin.part1.lesson22.dao.RoleController;
-import ru.innopolis.university.fomin.part1.lesson22.dao.UserController;
-import ru.innopolis.university.fomin.part1.lesson22.connection.PostgreConnectionManager;
-import ru.innopolis.university.fomin.part1.lesson22.model.RoleModel;
-import ru.innopolis.university.fomin.part1.lesson22.model.UserModel;
+import ru.innopolis.university.fomin.part1.lesson23.dao.ArticleController;
+import ru.innopolis.university.fomin.part1.lesson23.dao.RoleController;
+import ru.innopolis.university.fomin.part1.lesson23.dao.UserController;
+import ru.innopolis.university.fomin.part1.lesson23.connection.PostgreConnectionManager;
+import ru.innopolis.university.fomin.part1.lesson23.model.RoleModel;
+import ru.innopolis.university.fomin.part1.lesson23.model.UserModel;
 
 import java.sql.*;
 

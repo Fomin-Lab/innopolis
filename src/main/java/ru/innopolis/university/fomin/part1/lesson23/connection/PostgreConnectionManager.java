@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson22.connection;
+package ru.innopolis.university.fomin.part1.lesson23.connection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

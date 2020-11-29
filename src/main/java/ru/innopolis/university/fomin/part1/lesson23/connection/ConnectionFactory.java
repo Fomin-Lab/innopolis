@@ -1,6 +1,6 @@
-package ru.innopolis.university.fomin.part1.lesson22.connection;
+package ru.innopolis.university.fomin.part1.lesson23.connection;
 
-import ru.innopolis.university.fomin.part1.lesson22.DatabaseUtil;
+import ru.innopolis.university.fomin.part1.lesson23.DatabaseUtil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
