@@ -35,7 +35,7 @@ public abstract class AbstractController<T extends AbstractModel> {
     /**
      * @return SQL for searching the all entries
      */
-    protected String getSelectAllQuery() {
+    public String getSelectAllQuery() {
         return "SELECT * FROM " + tableName();
     }
 
