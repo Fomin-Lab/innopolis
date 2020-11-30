@@ -13,10 +13,10 @@ import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.MockitoAnnotations.openMocks;
 
 /**
- * Test for Main class
+ * Tests for Main class
  */
 class MainTest {
     /**
@@ -70,7 +70,7 @@ class MainTest {
     @BeforeEach
     void setUp() throws SQLException {
         LOGGER.trace("setUp");
-        initMocks(this);
+        openMocks(this);
         when(connectionManager.getConnection()).thenReturn(connection);
         when(preparedStatement.getGeneratedKeys()).thenReturn(resultSet);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
