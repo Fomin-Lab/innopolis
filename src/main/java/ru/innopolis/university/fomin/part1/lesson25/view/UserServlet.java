@@ -18,7 +18,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String id = (String) req.getAttribute("id");
+        final String id = req.getParameter("id");
         final UserModel user = userController.getEntityById(Integer.parseInt(id));
         req.setAttribute("user", user);
         req.getRequestDispatcher("WEB-INF/jsp/show-user.jsp").forward(req, resp);

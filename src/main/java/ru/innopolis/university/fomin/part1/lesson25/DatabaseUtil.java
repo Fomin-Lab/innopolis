@@ -37,7 +37,7 @@ public class DatabaseUtil {
     /**
      * Address to connect
      */
-    private static final String ADDRESS = "pde";
+    private static final String ADDRESS = "host.docker.internal";
 
     /**
      * Port to connect
