@@ -36,6 +36,7 @@ public class DatabaseUtil {
 
     /**
      * Address to connect
+     * host.docker.internal - this address from docker container to localhost
      */
     private static final String ADDRESS = "host.docker.internal";
 
