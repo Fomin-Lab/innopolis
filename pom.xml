@@ -6,6 +6,7 @@
 
     <groupId>ru.innopolis.university</groupId>
     <artifactId>innopolis</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -19,6 +20,9 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>src/main/java/ru/innopolis/university/fomin/part1/lesson22</module>
+    </modules>
 
     <dependencies>
         <dependency>
