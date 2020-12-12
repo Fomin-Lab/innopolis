@@ -1,1 +1,1 @@
-Solution into the branch '[lesson23](https://github.com/iSFomin/innopolis/tree/lesson23)'
+Also, solution into the branch '[lesson23](https://github.com/iSFomin/innopolis/tree/lesson23)'

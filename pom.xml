@@ -22,6 +22,7 @@
     </build>
     <modules>
         <module>src/main/java/ru/innopolis/university/fomin/part1/lesson22</module>
+        <module>src/main/java/ru/innopolis/university/fomin/part1/lesson23</module>
     </modules>
 
     <dependencies>
