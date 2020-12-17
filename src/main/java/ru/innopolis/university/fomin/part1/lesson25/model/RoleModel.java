@@ -14,6 +14,11 @@ public class RoleModel extends AbstractModel {
     private String title;
 
     /**
+     * Default constructor
+     */
+    public RoleModel() { }
+
+    /**
      * Constructor
      *
      * @param title Title of role

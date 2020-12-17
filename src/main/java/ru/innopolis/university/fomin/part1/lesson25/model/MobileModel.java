@@ -10,6 +10,11 @@ import java.sql.SQLException;
 public class MobileModel extends AbstractModel {
     protected String typeOS;
 
+    /**
+     * Default constructor
+     */
+    public MobileModel() { }
+
     public void setTypeOS(String type) {
         this.typeOS = type;
     }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/show-user")
+@WebServlet(urlPatterns = "/users/show")
 public class UserServlet extends HttpServlet {
     @Inject
     private UserController userController;

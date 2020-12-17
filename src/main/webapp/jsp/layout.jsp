@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%!
     public String createTitle(String arg) {
-        String str = "PageTitle: ";
+        String str = "Java EE: ";
         return str + arg;
     }
 %>

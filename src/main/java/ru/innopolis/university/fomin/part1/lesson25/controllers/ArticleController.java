@@ -4,11 +4,14 @@ import ru.innopolis.university.fomin.part1.lesson25.connection.ConnectionManager
 import ru.innopolis.university.fomin.part1.lesson25.scheme.BlogDbScheme;
 import ru.innopolis.university.fomin.part1.lesson25.model.ArticleModel;
 
+import javax.ejb.EJB;
+import javax.inject.Inject;
 import java.sql.*;
 
 /**
  * Article controller for perform CRUD operations
  */
+@EJB
 public class ArticleController extends AbstractController<ArticleModel> {
     /**
      * SQL for inserting the entry
@@ -28,6 +31,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      *
      * @param connection Jdbc connection
      */
+    @Inject
     public ArticleController(ConnectionManager connection) {
         super(connection);
     }

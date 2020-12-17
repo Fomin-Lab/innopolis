@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/")
+@WebServlet(urlPatterns = "/users")
 public class AllUsersServlet extends HttpServlet {
     @Inject
     private UserController userController;

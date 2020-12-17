@@ -17,6 +17,11 @@ public class ArticleModel extends AbstractModel {
     private int likes;
 
     /**
+     * Default constructor
+     */
+    public ArticleModel() { }
+
+    /**
      * Constructor
      *
      * @param title Article title
