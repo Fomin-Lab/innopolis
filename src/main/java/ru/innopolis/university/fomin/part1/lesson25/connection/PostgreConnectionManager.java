@@ -4,13 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 @EJB
-@SessionScoped
+@RequestScoped
 public class PostgreConnectionManager implements ConnectionManager, Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(PostgreConnectionManager.class);
 

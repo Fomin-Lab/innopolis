@@ -1,26 +1,28 @@
-package ru.innopolis.university.fomin.part1.lesson25.dao;
+package ru.innopolis.university.fomin.part1.lesson25.controllers;
 
 import ru.innopolis.university.fomin.part1.lesson25.connection.ConnectionManager;
 import ru.innopolis.university.fomin.part1.lesson25.scheme.BlogDbScheme;
-import ru.innopolis.university.fomin.part1.lesson25.model.ArticleModel;
+import ru.innopolis.university.fomin.part1.lesson25.model.RoleModel;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
- * Article controller for perform CRUD operations
+ * Role controller for perform CRUD operations
  */
-public class ArticleController extends AbstractController<ArticleModel> {
+public class RoleController extends AbstractController<RoleModel> {
     /**
      * SQL for inserting the entry
      */
-    private static final String INSERT_SQL = "INSERT INTO " + BlogDbScheme.ArticleTable.NAME + " "
-            + "(title, content, author_id, likes) VALUES (?, ?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO " + BlogDbScheme.RolesTable.NAME + " "
+            + "(title) VALUES (?)";
 
     /**
      * SQL for updating the entry
      */
-    private static final String UPDATE_SQL = "UPDATE " + BlogDbScheme.ArticleTable.NAME + " "
-            + "SET title = ?, content = ?, author_id = ?, likes = ? "
+    private static final String UPDATE_SQL = "UPDATE " + BlogDbScheme.RolesTable.NAME + " "
+            + "SET title = ? "
             + "WHERE id = ?";
 
     /**
@@ -28,7 +30,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      *
      * @param connection Jdbc connection
      */
-    public ArticleController(ConnectionManager connection) {
+    public RoleController(ConnectionManager connection) {
         super(connection);
     }
 
@@ -57,7 +59,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      */
     @Override
     protected String tableName() {
-        return BlogDbScheme.ArticleTable.NAME;
+        return BlogDbScheme.RolesTable.NAME;
     }
 
     /**
@@ -68,8 +70,8 @@ public class ArticleController extends AbstractController<ArticleModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected ArticleModel createModel(ResultSet rs) throws SQLException {
-        return new ArticleModel(rs);
+    protected RoleModel createModel(ResultSet rs) throws SQLException {
+        return new RoleModel(rs);
     }
 
     /**
@@ -82,7 +84,7 @@ public class ArticleController extends AbstractController<ArticleModel> {
      * @throws SQLException If occur sql exception
      */
     @Override
-    protected void loadPreparedStatement(PreparedStatement ps, ArticleModel model, boolean updating) throws SQLException {
+    protected void loadPreparedStatement(PreparedStatement ps, RoleModel model, boolean updating) throws SQLException {
         model.sendToPreparedStatement(ps, updating);
     }
 }

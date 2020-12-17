@@ -127,6 +127,9 @@ public class DatabaseUtil {
                     + "EXCEPTION TEXT)"
             );
 
+            // Таблица мобильных телефонов
+            // TODO: Создать таблицу
+
         } catch (SQLException e) {
             LOGGER.error("sql exception", e);
         }
@@ -176,6 +179,9 @@ public class DatabaseUtil {
                     "values ('Статья 4', 'Текст статьи 4', '4')");
             statement.addBatch("insert into bg_articles (title, content, author_id)\n" +
                     "values ('Статья 5', 'Текст статьи 5', '5')");
+
+            // Таблица мобильных телефонов
+            // TODO: Накидать данных в таблицу
 
             statement.executeBatch();
 

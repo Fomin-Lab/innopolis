@@ -1,5 +1,7 @@
 package ru.innopolis.university.fomin.part1.lesson25.model;
 
+import ru.innopolis.university.fomin.part1.lesson25.statistic.Visitor;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -124,5 +126,10 @@ public class ArticleModel extends AbstractModel {
         if (updating) {
             ps.setInt(5, getId());
         }
+    }
+
+    @Override
+    public void accept(Visitor v) {
+        v.visitArticle(this);
     }
 }

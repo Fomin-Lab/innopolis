@@ -1,5 +1,7 @@
 package ru.innopolis.university.fomin.part1.lesson25.model;
 
+import ru.innopolis.university.fomin.part1.lesson25.statistic.Visitor;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,4 +27,6 @@ public abstract class AbstractModel {
      * @throws SQLException If occur sql exception
      */
     public abstract void sendToPreparedStatement(PreparedStatement ps, boolean updating) throws SQLException;
+
+    public abstract void accept(Visitor v);
 }

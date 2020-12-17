@@ -2,7 +2,7 @@
 <Configuration>
     <Appenders>
         <!-- Файловый аппендер -->
-        <RollingFile name="file" fileName="log-application.log" filePattern="./log-application-%d{yyyy-MM-dd}.log">
+        <RollingFile name="file" fileName="/logs/log-application.log" filePattern="./log-application-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
             </PatternLayout>

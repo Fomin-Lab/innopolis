@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson25.dao;
+package ru.innopolis.university.fomin.part1.lesson25.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +25,18 @@ public abstract class AbstractController<T extends AbstractModel> {
     protected Connection connection;
 
     /**
-     * Constructor
-     * @param connection Instance of jdbc connection
+     * Connection manager
      */
-    public AbstractController(ConnectionManager connection) {
+    protected ConnectionManager connectionManager;
+
+    /**
+     * Constructor
+     * @param connectionManager Instance of jdbc connection manager
+     */
+    public AbstractController(ConnectionManager connectionManager) {
         LOGGER.trace("start controller constructor [" + tableName() + "]");
-        this.connection = connection.getConnection();
+        this.connection = connectionManager.getConnection();
+        this.connectionManager = connectionManager;
     }
 
     /**
@@ -100,7 +106,7 @@ public abstract class AbstractController<T extends AbstractModel> {
     public List<T> getAll() {
         List<T> result = new ArrayList<>();
 
-        try (PreparedStatement ps = connection.prepareStatement(getSelectAllQuery())) {
+        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getSelectAllQuery())) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 result.add(createModel(rs));
@@ -119,7 +125,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return Instance of model
      */
     public T getEntityById(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(getSelectByIdQuery())) {
+        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getSelectByIdQuery())) {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
@@ -139,7 +145,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return True if was deleted
      */
     public boolean delete(int id) {
-        try (PreparedStatement ps = connection.prepareStatement(getDeleteByIdQuery())) {
+        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getDeleteByIdQuery())) {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -155,7 +161,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return Identifier of created entry
      */
     public int create(T model) {
-        try (PreparedStatement ps = connection.prepareStatement(getInsertQuery(), Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getInsertQuery(), Statement.RETURN_GENERATED_KEYS)) {
             loadPreparedStatement(ps, model, false);
             ps.executeUpdate();
 
@@ -179,7 +185,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return True if success updated
      */
     public boolean update(T model) {
-        try (PreparedStatement ps = connection.prepareStatement(getUpdateQuery())) {
+        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getUpdateQuery())) {
             loadPreparedStatement(ps, model, true);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {

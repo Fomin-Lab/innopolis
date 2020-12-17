@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson25.dao;
+package ru.innopolis.university.fomin.part1.lesson25.controllers;
 
 import ru.innopolis.university.fomin.part1.lesson25.connection.ConnectionManager;
 import ru.innopolis.university.fomin.part1.lesson25.scheme.BlogDbScheme;
@@ -6,7 +6,6 @@ import ru.innopolis.university.fomin.part1.lesson25.model.UserModel;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
