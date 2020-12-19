@@ -13,6 +13,7 @@ public class UserModel extends AbstractModel {
     private int id;
     private String name;
     private String login;
+    private String password;
     private int roleId;
     private int rate;
 
@@ -69,6 +70,14 @@ public class UserModel extends AbstractModel {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getRate() {
         return rate;
     }
@@ -91,6 +100,7 @@ public class UserModel extends AbstractModel {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
                 ", roleId=" + roleId +
                 ", rate=" + rate +
                 '}';
@@ -105,9 +115,10 @@ public class UserModel extends AbstractModel {
     public void loadFromResultSet(ResultSet rs) throws SQLException {
         setId(rs.getInt(1));
         setLogin(rs.getString(2));
-        setName(rs.getString(3));
-        setRoleId(rs.getInt(4));
-        setRate(rs.getInt(5));
+        setPassword(rs.getString(3));
+        setName(rs.getString(4));
+        setRoleId(rs.getInt(5));
+        setRate(rs.getInt(6));
     }
 
     /**
@@ -121,12 +132,13 @@ public class UserModel extends AbstractModel {
     @Override
     public void sendToPreparedStatement(PreparedStatement ps, boolean updating) throws SQLException {
         ps.setString(1, getLogin());
-        ps.setString(2, getName());
-        ps.setInt(3, getRoleId());
-        ps.setInt(4, getRate());
+        ps.setString(2, getPassword());
+        ps.setString(3, getName());
+        ps.setInt(4, getRoleId());
+        ps.setInt(5, getRate());
 
         if (updating) {
-            ps.setInt(5, getId());
+            ps.setInt(6, getId());
         }
     }
 

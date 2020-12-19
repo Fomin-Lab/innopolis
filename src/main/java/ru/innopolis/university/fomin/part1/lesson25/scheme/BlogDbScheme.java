@@ -38,4 +38,14 @@ public class BlogDbScheme {
          */
         public static final String NAME = "bg_users";
     }
+
+    /**
+     * Table of mobiles
+     */
+    public static final class MobilesTable {
+        /**
+         * Name of the table
+         */
+        public static final String NAME = "bg_mobiles";
+    }
 }

@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson25.servlet;
+package ru.innopolis.university.fomin.part1.lesson25.servlet.user;
 
 import ru.innopolis.university.fomin.part1.lesson25.controllers.UserController;
 import ru.innopolis.university.fomin.part1.lesson25.model.UserModel;
@@ -9,8 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/users")
 public class AllUsersServlet extends HttpServlet {

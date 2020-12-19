@@ -34,7 +34,7 @@
         </Root>
         <!-- Мои логгеры -->
         <!-- Не логируем в БД в классе который пересоздаёт БД -->
-        <Logger name="ru.innopolis.university.fomin.part1.lesson22.DatabaseUtil" level="info" additivity="false">
+        <Logger name="ru.innopolis.university.fomin.part1.lesson25.DatabaseUtil" level="info" additivity="false">
             <AppenderRef ref="file" level="TRACE"/>
             <AppenderRef ref="console" level="DEBUG"/>
         </Logger>

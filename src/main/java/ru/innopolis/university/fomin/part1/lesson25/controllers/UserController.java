@@ -1,8 +1,8 @@
 package ru.innopolis.university.fomin.part1.lesson25.controllers;
 
 import ru.innopolis.university.fomin.part1.lesson25.connection.ConnectionManager;
-import ru.innopolis.university.fomin.part1.lesson25.scheme.BlogDbScheme;
 import ru.innopolis.university.fomin.part1.lesson25.model.UserModel;
+import ru.innopolis.university.fomin.part1.lesson25.scheme.BlogDbScheme;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -19,13 +19,13 @@ public class UserController extends AbstractController<UserModel> {
      * SQL for inserting the entry
      */
     private static final String INSERT_SQL = "INSERT INTO " + BlogDbScheme.UsersTable.NAME + " "
-            + "(login, name, role_id, rate) VALUES (?, ?, ?, ?)";
+            + "(login, password, name, role_id, rate) VALUES (?, ?, ?, ?)";
 
     /**
      * SQL for updating the entry
      */
     private static final String UPDATE_SQL = "UPDATE " + BlogDbScheme.UsersTable.NAME + " "
-            + "SET login = ?, name = ?, role_id = ?, rate = ? "
+            + "SET login = ?, password = ?, name = ?, role_id = ?, rate = ? "
             + "WHERE id = ?";
 
     /**
@@ -90,5 +90,30 @@ public class UserController extends AbstractController<UserModel> {
     @Override
     protected void loadPreparedStatement(PreparedStatement ps, UserModel model, boolean updating) throws SQLException {
         model.sendToPreparedStatement(ps, updating);
+    }
+
+    /**
+     * Found user by credential
+     *
+     * @param login    Login
+     * @param password Password
+     * @return Found model
+     */
+    public UserModel getUserByCredentials(String login, String password) {
+        String sql = "SELECT * FROM " + tableName() + " "
+                + "WHERE login = ? and password = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, login);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return createModel(rs);
+            }
+        } catch (SQLException e) {
+            LOGGER.error("sql exception", e);
+        }
+        return null;
     }
 }

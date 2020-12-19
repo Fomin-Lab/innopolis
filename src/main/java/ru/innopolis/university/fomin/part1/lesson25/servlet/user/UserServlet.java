@@ -1,4 +1,4 @@
-package ru.innopolis.university.fomin.part1.lesson25.servlet;
+package ru.innopolis.university.fomin.part1.lesson25.servlet.user;
 
 import ru.innopolis.university.fomin.part1.lesson25.controllers.UserController;
 import ru.innopolis.university.fomin.part1.lesson25.model.UserModel;

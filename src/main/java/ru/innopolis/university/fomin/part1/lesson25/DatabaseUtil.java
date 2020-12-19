@@ -110,6 +110,7 @@ public class DatabaseUtil {
                     + "CREATE TABLE bg_users (\n"
                     + "id bigserial primary key,\n"
                     + "login varchar (100) NOT NULL,\n"
+                    + "password varchar NOT NULL,\n"
                     + "name varchar (100),\n"
                     + "role_id int DEFAULT 1,\n"
                     + "rate int DEFAULT 0)"
@@ -128,7 +129,13 @@ public class DatabaseUtil {
             );
 
             // Таблица мобильных телефонов
-            // TODO: Создать таблицу
+            LOGGER.info("DROP/CREATE table bg_mobiles");
+            statement.execute("DROP TABLE IF EXISTS bg_mobiles;\n"
+                    + "CREATE TABLE bg_mobiles (\n"
+                    + "id bigserial primary key,\n"
+                    + "type_of_os varchar,\n"
+                    + "model varchar)"
+            );
 
         } catch (SQLException e) {
             LOGGER.error("sql exception", e);
@@ -155,18 +162,18 @@ public class DatabaseUtil {
                     "values ('Администратор')");
 
             // Таблица пользователей
-            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
-                    "values ('ivanov', 'Иванов', '3')");
-            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
-                    "values ('vetochkin', 'Веточкин', '1')");
-            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
-                    "values ('kamushkin', 'Камушкин', '3')");
-            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
-                    "values ('zaborchik', 'Заборчик', '3')");
-            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
-                    "values ('zaplesneveiko', 'Заплесневейко', '3')");
-            statement.addBatch("insert into bg_users (login, name, role_id)\n" +
-                    "values ('root', 'Владелец', '4')");
+            statement.addBatch("insert into bg_users (login, password, name, role_id)\n" +
+                    "values ('ivanov', 'ivanov', 'Иванов', '3')");
+            statement.addBatch("insert into bg_users (login, password, name, role_id)\n" +
+                    "values ('vetochkin', 'vetochkin', 'Веточкин', '1')");
+            statement.addBatch("insert into bg_users (login, password, name, role_id)\n" +
+                    "values ('kamushkin', 'kamushkin', 'Камушкин', '3')");
+            statement.addBatch("insert into bg_users (login, password, name, role_id)\n" +
+                    "values ('zaborchik', 'zaborchik', 'Заборчик', '3')");
+            statement.addBatch("insert into bg_users (login, password, name, role_id)\n" +
+                    "values ('zaplesneveiko', 'zaplesneveiko', 'Заплесневейко', '3')");
+            statement.addBatch("insert into bg_users (login, password, name, role_id)\n" +
+                    "values ('root', 'root', 'Владелец', '4')");
 
             // Таблица статей
             statement.addBatch("insert into bg_articles (title, content, author_id)\n" +
@@ -181,7 +188,14 @@ public class DatabaseUtil {
                     "values ('Статья 5', 'Текст статьи 5', '5')");
 
             // Таблица мобильных телефонов
-            // TODO: Накидать данных в таблицу
+            statement.addBatch("insert into bg_mobiles (type_of_os, model)\n" +
+                    "values ('Android', 'Samsung Galaxy A51 64GB')");
+            statement.addBatch("insert into bg_mobiles (type_of_os, model)\n" +
+                    "values ('IOS', 'Apple iPhone 11 128GB')");
+            statement.addBatch("insert into bg_mobiles (type_of_os, model)\n" +
+                    "values ('Android', 'Xiaomi Redmi 9 4/64GB (NFC)')");
+            statement.addBatch("insert into bg_mobiles (type_of_os, model)\n" +
+                    "values ('Android', 'Xiaomi Poco X3 NFC 6/128GB')");
 
             statement.executeBatch();
 

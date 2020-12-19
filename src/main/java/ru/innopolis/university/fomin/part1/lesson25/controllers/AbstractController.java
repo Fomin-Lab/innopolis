@@ -106,7 +106,7 @@ public abstract class AbstractController<T extends AbstractModel> {
     public List<T> getAll() {
         List<T> result = new ArrayList<>();
 
-        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getSelectAllQuery())) {
+        try (PreparedStatement ps = connection.prepareStatement(getSelectAllQuery())) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 result.add(createModel(rs));
@@ -125,7 +125,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return Instance of model
      */
     public T getEntityById(int id) {
-        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getSelectByIdQuery())) {
+        try (PreparedStatement ps = connection.prepareStatement(getSelectByIdQuery())) {
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
@@ -145,7 +145,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return True if was deleted
      */
     public boolean delete(int id) {
-        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getDeleteByIdQuery())) {
+        try (PreparedStatement ps = connection.prepareStatement(getDeleteByIdQuery())) {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -161,7 +161,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return Identifier of created entry
      */
     public int create(T model) {
-        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getInsertQuery(), Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = connection.prepareStatement(getInsertQuery(), Statement.RETURN_GENERATED_KEYS)) {
             loadPreparedStatement(ps, model, false);
             ps.executeUpdate();
 
@@ -185,7 +185,7 @@ public abstract class AbstractController<T extends AbstractModel> {
      * @return True if success updated
      */
     public boolean update(T model) {
-        try (PreparedStatement ps = connectionManager.getConnection().prepareStatement(getUpdateQuery())) {
+        try (PreparedStatement ps = connection.prepareStatement(getUpdateQuery())) {
             loadPreparedStatement(ps, model, true);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
