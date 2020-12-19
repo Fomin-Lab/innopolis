@@ -40,11 +40,11 @@ public class ModelVisitor implements Visitor {
         statistic.incrementTotalCount();
         statistic.incrementCountMobiles();
 
-        if ("android".equals(mobile.getTypeOS())) {
+        if ("android".equalsIgnoreCase(mobile.getTypeOS())) {
             statistic.incrementCountAndroidPhones();
         }
 
-        if ("ios".equals(mobile.getTypeOS())) {
+        if ("ios".equalsIgnoreCase(mobile.getTypeOS())) {
             statistic.incrementCountApplePhones();
         }
     }

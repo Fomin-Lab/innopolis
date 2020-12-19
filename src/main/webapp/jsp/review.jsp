@@ -135,8 +135,11 @@
                     <li>Number of users: <strong>${statistic.countUsers}</strong></li>
                     <li>Number of articles: <strong>${statistic.countArticles}</strong></li>
                     <li>Number of roles: <strong>${statistic.countRoles}</strong></li>
+                    <li>Number of mobiles: <strong>${statistic.countMobiles}</strong></li>
                     <li>Min size article: <strong>${statistic.minSizeOfArticle}</strong></li>
                     <li>Max size article: <strong>${statistic.maxSizeOfArticle}</strong></li>
+                    <li>Number of Androids: <strong>${statistic.countAndroidPhones}</strong></li>
+                    <li>Number of Apples: <strong>${statistic.countApplePhones}</strong></li>
                 </ul>
             </div>
         </div>
@@ -144,7 +147,7 @@
 </div>
 
 <!--ul>
-    <c:forEach items="${users}" var="user">
-        <li><a href='show-user?id=${user.id}'>${user.name}</a></li>
-    </c:forEach>
+<c:forEach items="${users}" var="user">
+    <li><a href='show-user?id=${user.id}'>${user.name}</a></li>
+</c:forEach>
 </ul-->

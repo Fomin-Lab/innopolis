@@ -66,10 +66,10 @@ public class ReviewServlet extends HttpServlet {
         List<ArticleModel> articles = articleController.getAll();
 
         ModelVisitor visitor = new ModelVisitor();
-        users.forEach(visitor::visitUser);
-        roles.forEach(visitor::visitRole);
-        mobiles.forEach(visitor::visitMobile);
-        articles.forEach(visitor::visitArticle);
+        users.forEach(model -> model.accept(visitor));
+        roles.forEach(model -> model.accept(visitor));
+        mobiles.forEach(model -> model.accept(visitor));
+        articles.forEach(model -> model.accept(visitor));
 
         req.setAttribute("users", users);
         req.setAttribute("articles", articles);
