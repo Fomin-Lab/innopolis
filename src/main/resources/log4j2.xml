@@ -38,8 +38,8 @@
             <AppenderRef ref="file" level="TRACE"/>
             <AppenderRef ref="console" level="DEBUG"/>
         </Logger>
-        <Logger name="ru.innopolis.university.fomin.part1" level="trace" additivity="true">
-            <AppenderRef ref="db" level="INFO"/>
-        </Logger>
+<!--        <Logger name="ru.innopolis.university.fomin.part1" level="trace" additivity="true">-->
+<!--            <AppenderRef ref="db" level="INFO"/>-->
+<!--        </Logger>-->
     </Loggers>
 </Configuration>
