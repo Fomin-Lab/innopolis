@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class RequestFilter implements Filter {
@@ -22,12 +21,19 @@ public class RequestFilter implements Filter {
         String requestUriString = ((HttpServletRequest) servletRequest).getRequestURI();
         LOGGER.info("start doFilter() " + requestUriString);
 
+        MultipleServletRequest request1 = new MultipleServletRequest((HttpServletRequest) servletRequest);
+        MultipleServletRequest request2 = new MultipleServletRequest(request1);
+
+        //String requestBody = request1.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        //System.out.println("[REQUEST BODY]: " + requestBody);
+
         if ("/".equals(requestUriString)) {
-            servletResponse.getOutputStream().print("<response>error</response>");
-            return;
+            //servletResponse.getOutputStream().print("<response>error</response>");
+            //return;
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+
+        filterChain.doFilter(request2, servletResponse);
     }
 
     @Override

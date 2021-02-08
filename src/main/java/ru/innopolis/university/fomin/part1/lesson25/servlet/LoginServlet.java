@@ -53,6 +53,9 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
+        System.out.println("login: " + login);
+        System.out.println("password: " + password);
+
         UserModel model = userController.getUserByCredentials(login, password);
         if (model != null) {
             HttpSession session = req.getSession(false);
